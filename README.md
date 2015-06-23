@@ -1,7 +1,7 @@
 PCL with Openni Tutorial
 ========================
 
-This tuitorial is released by University of [León in spain](http://robotica.unileon.es/mediawiki/index.php/Home).
+This tuitorial is released by [University of León](http://robotica.unileon.es/mediawiki/index.php/Home) in spain.
 
 In this repository, you could find the detailed explaination in how to use the pcl functions in object-recognition. Thanks to Víctor Rodríguez, you can download the source code to learn how to use pcl for object recognition. 
 
@@ -20,6 +20,6 @@ Online Tuitorial
 
 * PCL/OpenNI tutorial 5: [3D object recognition - pipeline](http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline))
 
-* PCL/OpenNI [troubleshooting](http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting)
+* PCL/OpenNI tutorial: [troubleshooting](http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting)
 
-* PCL/OpenNI [Source code](http://robotica.unileon.es/~victorm/)
+* PCL/OpenNI tutorial: [Source code](http://robotica.unileon.es/~victorm/)
