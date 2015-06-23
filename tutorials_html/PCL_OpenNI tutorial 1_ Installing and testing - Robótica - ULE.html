@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8"><title>PCL/OpenNI tutorial 1: Installing and testing - Robótica - ULE</title>
+<meta name="generator" content="MediaWiki 1.22.5">
+<link rel="shortcut icon" href="http://robotica.unileon.es/mediawiki/skins/common/images/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://robotica.unileon.es/mediawiki/opensearch_desc.php" title="Robótica - ULE (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://robotica.unileon.es/mediawiki/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="Robótica - ULE Atom feed" href="http://robotica.unileon.es/mediawiki/index.php?title=Special:RecentChanges&feed=atom">
+<link rel="stylesheet" href="http://robotica.unileon.es/mediawiki/load.php?debug=false&lang=en&modules=ext.geshi.local%7Cmediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&only=styles&skin=vector&*">
+<style>
+.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:4250852ed2349a0d4d0fc6509a3e7d4c */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.autoellipsis-matched,.highlight{font-weight:bold}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9780324491b653a3780e2d029bdc140c */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;-webkit-box-shadow:0 2px 5px 0 #ccc;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(http://robotica.unileon.es/mediawiki/resources/mediawiki.action/images/green-checkmark.png?2014-04-10T08:01:40Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9b39df22efb31003b8c266f2194113b0 */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{text-decoration:none;color:black}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:52b1797f70c7e4094dfa4191101944e8 */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:c2f15db357ed1b34653e004540bd5f70 */</style>
+
+<script src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/load.php"></script><script src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/load(1).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"PCL/OpenNI_tutorial_1:_Installing_and_testing","wgTitle":"PCL/OpenNI tutorial 1: Installing and testing","wgCurRevisionId":4694,"wgRevisionId":4694,"wgArticleId":111,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"PCL/OpenNI_tutorial_1:_Installing_and_testing","wgIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"vector-simplesearch":1,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,
+"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: wikidb:resourceloader:filter:minify-js:7:5a69c7e0fa6557851b6dea8a62efaffb */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/load(2).php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cmake {line-height: normal;}
+.source-cmake li, .source-cmake pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cmake
+ * CSS class: source-cmake, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cmake.source-cmake .de1, .cmake.source-cmake .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cmake.source-cmake  {font-family:monospace;}
+.cmake.source-cmake .imp {font-weight: bold; color: red;}
+.cmake.source-cmake li, .cmake.source-cmake .li1 {font-weight: normal; vertical-align:top;}
+.cmake.source-cmake .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cmake.source-cmake .li2 {font-weight: bold; vertical-align:top;}
+.cmake.source-cmake .kw1 {color: #1f3f81; font-style: bold;}
+.cmake.source-cmake .kw2 {color: #1f3f81;}
+.cmake.source-cmake .kw3 {color: #077807; font-sytle: italic;}
+.cmake.source-cmake .co1 {color: #666666; font-style: italic;}
+.cmake.source-cmake .es0 {color: #000099; font-weight: bold;}
+.cmake.source-cmake .es1 {color: #b08000;}
+.cmake.source-cmake .es2 {color: #0000cd;}
+.cmake.source-cmake .sy0 {color: #197d8b;}
+.cmake.source-cmake .st0 {color: #912f11;}
+.cmake.source-cmake .re0 {color: #b08000;}
+.cmake.source-cmake .re1 {color: #0000cd;}
+.cmake.source-cmake .ln-xtra, .cmake.source-cmake li.ln-xtra, .cmake.source-cmake div.ln-xtra {background-color: #ffc;}
+.cmake.source-cmake span.xtra { display:block; }
+
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/mediawiki/skins/vector/csshover.min.htc")}</style><![endif]--><script async="" src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/load(3).php"></script></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PCL_OpenNI_tutorial_1_Installing_and_testing skin-vector action-view vector-animateLayout">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">PCL/OpenNI tutorial 1: Installing and testing</span></h1>
+			<div id="bodyContent">
+								<div id="siteSub">From Robótica - ULE</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#mw-navigation">navigation</a>, 					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p>
+<hr>
+<hr>
+<p><br>
+</p>
+<div class="thumb tright"><div class="thumbinner" style="width:202px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Kinect.jpg" class="image"><img alt="" src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/Kinect.jpg" width="200" height="83" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Kinect.jpg" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Microsoft Kinect device.</div></div></div>
+<p>This series of tutorials will explain the usage of a depth camera like <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Kinect">Kinect</a> for "serious" researching purposes. As you may know, Kinect is in fact an affordable depth sensor, developed with technology from <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/PrimeSense">PrimeSense</a>, based on infrarred structured light method. It also has a common camera (which makes it a RGB-D device), a microphone and a motorized pivot. Its use is not limited to playing with a Xbox360 console, you can plug it to a computer and use it like any other sensor. Many open-source drivers and frameworks are available.
+</p><p>Since its release on November 2010, it has gained a lot of popularity, specially among the scientific community. Many researches have procured themselves one because, despite the low cost (about 100 $), it has proven to be a powerful solution for depth sensing projects. Current investigations focus on real-time surface mapping, object recognition and tracking, and localization. Impressive results (like the <a rel="nofollow" class="external text" href="http://research.microsoft.com/en-us/projects/surfacerecon/">KinectFusion</a> project from Microsoft) are already possible.
+</p><p>The new Xbox One ships with an upgraded <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Kinect_for_Xbox_One">v2 version</a> of Kinect, with enhanced resolution, that is able to detect your facial expression, measure your heart rate, and track every one of your fingers. The PC development-ready version (<a rel="nofollow" class="external text" href="http://www.microsoft.com/en-us/kinectforwindows/">Kinect for Windows v2</a>) was released on July 2014, but right now it can only be used with the official Windows SDK (open source support <a rel="nofollow" class="external text" href="https://github.com/OpenKinect/libfreenect2">exists</a> but is still young), so I will explain the installation and usage of one of the "legacy" Kinect 1.0 devices with a common PC, and the possibilities it offers. I will do it in an easy to understand way, intended for students that have just acquired it and want to start from scratch.
+</p><p>Keep in mind that the software that we are going to use (Point Cloud Library and OpenNI drivers) will also let you use any other device like the <a rel="nofollow" class="external text" href="http://www.asus.com/Multimedia/Xtion_PRO/">Xtion PRO</a> or <a rel="nofollow" class="external text" href="http://www.asus.com/Multimedia/Xtion_PRO_LIVE/">Xtion PRO LIVE</a> from ASUS (the PRO only has a depth sensor, the PRO LIVE is a RGB-D camera) without changing a line of code.
+</p><p><span style="color:#606060"><i><b>NOTE: The tutorials are written for Linux platforms. Also, 64-bit versions seem to work better than 32-bit.</b></i></span>
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Requirements"><span class="tocnumber">1</span> <span class="toctext">Requirements</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Connecting_everything"><span class="tocnumber">2</span> <span class="toctext">Connecting everything</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Installing_the_software"><span class="tocnumber">3</span> <span class="toctext">Installing the software</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Precompiled_PCL_for_Ubuntu"><span class="tocnumber">3.1</span> <span class="toctext">Precompiled PCL for Ubuntu</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Compiling_PCL_from_source"><span class="tocnumber">3.2</span> <span class="toctext">Compiling PCL from source</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Installing_the_dependencies"><span class="tocnumber">3.2.1</span> <span class="toctext">Installing the dependencies</span></a>
+<ul>
+<li class="toclevel-4 tocsection-7"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#JDK"><span class="tocnumber">3.2.1.1</span> <span class="toctext">JDK</span></a></li>
+<li class="toclevel-4 tocsection-8"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#OpenNI"><span class="tocnumber">3.2.1.2</span> <span class="toctext">OpenNI</span></a></li>
+<li class="toclevel-4 tocsection-9"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#CUDA"><span class="tocnumber">3.2.1.3</span> <span class="toctext">CUDA</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-10"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Getting_the_source"><span class="tocnumber">3.2.2</span> <span class="toctext">Getting the source</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Compiling"><span class="tocnumber">3.2.3</span> <span class="toctext">Compiling</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Installing"><span class="tocnumber">3.2.4</span> <span class="toctext">Installing</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Testing_.28OpenNI_viewer.29"><span class="tocnumber">4</span> <span class="toctext">Testing (OpenNI viewer)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#CMakeLists.txt"><span class="tocnumber">4.1</span> <span class="toctext">CMakeLists.txt</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#main.cpp"><span class="tocnumber">4.2</span> <span class="toctext">main.cpp</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Compiling_2"><span class="tocnumber">4.3</span> <span class="toctext">Compiling</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Executing"><span class="tocnumber">4.4</span> <span class="toctext">Executing</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Conclusion"><span class="tocnumber">5</span> <span class="toctext">Conclusion</span></a></li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Requirements">Requirements</span></h1>
+<p>You will need the following:
+</p>
+<ul>
+<li> A common Kinect device, out of the box. You can buy it in your local electronics shop, or <a rel="nofollow" class="external text" href="http://www.microsoftstore.com/store/msusa/en_US/pdp/Kinect-for-Xbox-360/productID.253169000">online</a>. It also includes a free copy of <i><a rel="nofollow" class="external text" href="http://marketplace.xbox.com/en-US/Product/Kinect-Adventures/66acd000-77fe-1000-9115-d8024d5308ed">Kinect Adventures</a></i>, which is useless if you do not own the console. Microsoft has released a <i>Kinect for Windows</i> device, which is a normal looking Kinect no longer compatible with Xbox360, that will only work with their official SDK, intended for developers only. Also, like I stated earlier, you can use an ASUS Xtion indistinctly.
+</li>
+<li> A computer running Linux (Debian or Ubuntu preferably).
+</li>
+<li> A medium-sized room. Kinect has some limitations for depth measurement: 40cm minimum, 8m maximum (make it 6).
+</li>
+</ul>
+<p><span style="color:#606060"><b><i>NOTE: </i>Kinect for Windows<i> may have problems working with open source drivers on Linux .</i></b></span>
+</p>
+<h1><span class="mw-headline" id="Connecting_everything">Connecting everything</span></h1>
+<p>Kinect does not work with a common USB port. Its power consumption is a bit higher because of the motor, so Microsoft came up with a connector that combines USB and power supply. Old Xbox 360 models needed a special adapter, new S model ones already have this new port. Luckily, Kinect comes with the official adapter out of the box (otherwise you will have to <a rel="nofollow" class="external text" href="http://www.amazon.com/Power-Supply-Cable-Kinect-Xbox-360/dp/B004S7GA46/ref=sr_1_1?ie=UTF8&qid=1378288327&sr=8-1">buy one</a>).
+</p><p>Just plug the adapter to any power socket, and the USB to your computer. Let's check typing this in a terminal:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">lsusb</pre></div></div>
+<p>Output should list the following devices:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">Bus 001 Device 005: ID 045e:02b0 Microsoft Corp. Xbox NUI Motor
+Bus 001 Device 006: ID 045e:02ad Microsoft Corp. Xbox NUI Audio
+Bus 001 Device 007: ID 045e:02ae Microsoft Corp. Xbox NUI Camera</pre></div></div>
+<p>If you are using a Xtion, you should see:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">Bus 001 Device 004: ID 1d27:0601 ASUS</pre></div></div>
+<p>"0601" identifies the new Xtion model, "0600" the older one. Both should work the same. But try to avoid <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#ASUS_Xtion_PRO" title="PCL/OpenNI troubleshooting">USB 3.0 ports</a>!
+</p>
+<h1><span class="mw-headline" id="Installing_the_software">Installing the software</span></h1>
+<p>There is more than one way to get your Kinect working on your PC, and start developing applications for it:
+</p>
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://www.microsoft.com/en-us/download/details.aspx?id=40278">Kinect for Windows SDK</a> and <a rel="nofollow" class="external text" href="http://www.microsoft.com/en-us/download/details.aspx?id=40276">Developer Toolkit</a>: released on June 16, 2011 as a non-commercial SDK intended for application development. Version 1.8, the last there will ever be now that Kinect v2 is out, was released on September 2013. Because it comes from Microsoft, it is obviously the easiest way to get everything working. Sadly, there is no Linux version.
+</li>
+<li> <a rel="nofollow" class="external text" href="https://github.com/OpenKinect/libfreenect">libfreenect</a> library: from the <a rel="nofollow" class="external text" href="http://openkinect.org/wiki/Main_Page">OpenKinect</a> project, it is intended to be a free and open source alternative to the official drivers. libfreenect is used by projects like <a rel="nofollow" class="external text" href="https://github.com/ofTheo/ofxKinect">ofxKinect</a>, an addon for the <a rel="nofollow" class="external text" href="http://www.openframeworks.cc/">openFrameworks</a> toolkit (and as of version 0.8, included in the core package) that runs on Linux and OS X. ofxKinect packs a nice example application to show the RGB and point cloud taken from Kinect.
+</li>
+<li> <a rel="nofollow" class="external text" href="https://github.com/PrimeSense/Sensor">PrimeSense drivers</a>: they were released as open source after the the <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/OpenNI">OpenNI</a> project was created, along with the motion tracking middleware, <i>NITE</i>, and the SDK. NI stands for Natural Interaction, and the project tried to enforce a common standard for human input using Kinect-like sensors. These official drivers are used by <a rel="nofollow" class="external text" href="http://wiki.ros.org/openni_kinect">ROS</a> (the Robot Operating System, a massive collection of libraries and tools for robotic researchers) and <a rel="nofollow" class="external text" href="http://pointclouds.org/">PCL</a> (the Point Cloud Library, with everything needed for 3D point cloud processing). Sadly, version 2.0 of the OpenNI SDK dropped support for Kinect on Linux due to licensing issues, so for now PCL relies on legacy 1.x versions. Also, Apple bought PrimeSense on November 2013, and on April 2014 OpenNI's webpage was closed. The source is now being maintained by <a rel="nofollow" class="external text" href="http://structure.io/openni">a third party</a>.
+</li>
+<li> <a rel="nofollow" class="external text" href="https://github.com/avin2/SensorKinect">SensorKinect</a>: a modified version of the official PrimeSense drivers, used for example by <a rel="nofollow" class="external text" href="https://github.com/gameoverhack/ofxOpenNI">ofxOpenNI</a> (another openFrameworks addon). Last updated on 2012.
+</li>
+</ul>
+<p>For this tutorial, we are going to use PCL with the OpenNI drivers, so owners of a Xtion can also get it to work.
+</p>
+<h2><span class="mw-headline" id="Precompiled_PCL_for_Ubuntu">Precompiled PCL for Ubuntu</span></h2>
+<p>If you have a valid installation of <a rel="nofollow" class="external text" href="http://wiki.ros.org/indigo/Installation/Ubuntu">ROS</a> (through their repository), you do not have to install anything. Both OpenNI and PrimeSense drivers, as well as PCL, should be already installed. You can check it with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> libpcl-<span class="nu0">1.7</span>-all libpcl-<span class="nu0">1.7</span>-all-dev libopenni-dev libopenni-sensor-primesense-dev</pre></div></div>
+<p>The previous command should state that all packages are already installed (change the PCL version number as needed), install them if not. If you get an error about overwriting some file, check <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Trying_to_overwrite_X.2C_which_is_also_in_package_Y" title="PCL/OpenNI troubleshooting">this</a>.
+</p><p>In case you do not want ROS, there is a <a rel="nofollow" class="external text" href="https://launchpad.net/~v-launchpad-jochen-sprickerhof-de/+archive/ubuntu/pcl">PPA</a> (Personal Package Archive, a private repository) which has everything we need. Add it to your sources, and install everything:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de<span class="sy0">/</span>pcl
+<span class="kw2">sudo</span> <span class="kw2">apt-get</span> update
+<span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> build-essential cmake libpcl1.7 libpcl-dev pcl-tools</pre></div></div>
+<p>Trying to mix ROS and PCL repositories and packages can cause some errors, so choose one of them and stick with it. Check the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting" title="PCL/OpenNI troubleshooting">PCL/OpenNI troubleshooting</a> page because your Kinect may not work by default in 32 bits.
+</p>
+<h2><span class="mw-headline" id="Compiling_PCL_from_source">Compiling PCL from source</span></h2>
+<p>For Linuxes without a precompiled version of PCL, you will need to compile it yourself. This has an advantage, actually: you can customize the build options and choose what you want. Also, the resulting binaries and libraries should be a bit faster. And you always get the latest version! The instructions are <a rel="nofollow" class="external text" href="http://pointclouds.org/downloads/source.html">here</a>, but the steps are easy so I will show them to you.
+</p>
+<h3><span class="mw-headline" id="Installing_the_dependencies">Installing the dependencies</span></h3>
+<p>Some of PCL dependencies can be installed via the package manager. Others will require additional work.
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> build-essential cmake cmake-curses-gui libboost-all-dev libeigen3-dev libflann-dev libvtk5-dev libvtk5-qt4-dev libglew-dev libxmu-dev libsuitesparse-dev libqhull-dev libpcap-dev libxmu-dev libxi-dev libgtest-dev libqt4-opengl-dev</div></div>
+<p>The trunk version of PCL uses <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/VTK">VTK</a> 6 and <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Qt_%28software%29">Qt</a> 5, so if you intend to compile it, you must install the following packages (say yes if you are asked to remove VTK 5 and Qt 4 packages):
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> libvtk6-dev libqt5opengl5-dev</div></div>
+<h4><span class="mw-headline" id="JDK">JDK</span></h4>
+<p>OpenNI requires Sun's official JDK (Java Development Kit), which is no longer available on official apt repositories. You can use <a rel="nofollow" class="external text" href="http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html">unofficial ones</a>, or do it manually. For the last method, go to the <a rel="nofollow" class="external text" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java SE downloads</a> page (SE means Standard Edition) and download the latest version (e.g., <span style="color:#1E90FF"><i>jdk-8u45-linux-x64.tar.gz</i></span>). Extract it, then move the contents to <span style="color:#FF8C00"><i>/usr/lib/jvm/</i></span> so it is available system-wide:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">mkdir</span> <span class="re5">-p</span> <span class="sy0">/</span>usr<span class="sy0">/</span>lib<span class="sy0">/</span>jvm<span class="sy0">/</span>
+<span class="kw2">sudo</span> <span class="kw2">cp</span> <span class="re5">-r</span> jdk1.8.0_45<span class="sy0">/</span> <span class="sy0">/</span>usr<span class="sy0">/</span>lib<span class="sy0">/</span>jvm<span class="sy0">/</span></pre></div></div>
+<p>Then, make it the default choice to compile and run Java programs. Remember to change the version number as needed!
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> update-alternatives <span class="re5">--install</span> <span class="st0">"/usr/bin/java"</span> <span class="st0">"java"</span> <span class="st0">"/usr/lib/jvm/jdk1.8.0_45/bin/java"</span> 1
+<span class="kw2">sudo</span> update-alternatives <span class="re5">--install</span> <span class="st0">"/usr/bin/javac"</span> <span class="st0">"javac"</span> <span class="st0">"/usr/lib/jvm/jdk1.8.0_45/bin/javac"</span> 1
+<span class="kw2">sudo</span> update-alternatives <span class="re5">--install</span> <span class="st0">"/usr/bin/jar"</span> <span class="st0">"jar"</span> <span class="st0">"/usr/lib/jvm/jdk1.8.0_45/bin/jar"</span> <span class="nu0">1</span></pre></div></div>
+<p>To be sure, use the following commands to manually select the correct option, in case there is more than one choice:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> update-alternatives <span class="re5">--config</span> java
+<span class="kw2">sudo</span> update-alternatives <span class="re5">--config</span> javac
+<span class="kw2">sudo</span> update-alternatives <span class="re5">--config</span> jar</pre></div></div>
+<p>If you are still not sure, run them and display the version, making sure it is the one you installed:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">java <span class="re5">-version</span>
+javac <span class="re5">-version</span></pre></div></div>
+<p>Sun's JDK is now installed.
+</p>
+<h4><span class="mw-headline" id="OpenNI">OpenNI</span></h4>
+<p>PCL uses OpenNI and the PrimeSense drivers to get data from devices like Kinect or Xtion. It is optional, but it would not make much sense not to install it, would it? If you are using Ubuntu, add the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#Precompiled_PCL_for_Ubuntu"> PPA</a> and install <span style="color:#228B22"><i>libopenni-dev</i></span> and <span style="color:#228B22"><i>libopenni-sensor-primesense-dev</i></span>, which should be done already. Otherwise, fetch the <a rel="nofollow" class="external text" href="https://github.com/OpenNI/OpenNI">OpenNI</a> and <a rel="nofollow" class="external text" href="https://github.com/PrimeSense/Sensor">PrimeSense Sensor</a> sources from GitHub (download them as .zip, the link is on the right). Extract them, and install the dependencies:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> python libusb-<span class="nu0">1.0</span>-<span class="nu0">0</span>-dev freeglut3-dev doxygen graphviz</pre></div></div>
+<p>Go to the directory where you extracted OpenNI (<span style="color:#FF8C00"><i>OpenNI-master/</i></span> for me), and open a terminal in the <span style="color:#FF8C00"><i>Platform/Linux/CreateRedist/</i></span> subdirectory. Issue:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">.<span class="sy0">/</span>RedistMaker</pre></div></div>
+<p>When it finishes, and if there are no errors (check the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting" title="PCL/OpenNI troubleshooting">PCL/OpenNI troubleshooting</a> page if you get any), go to <span style="color:#FF8C00"><i>Platform/Linux/Redist/OpenNI-Bin-Dev-Linux-x64-v1.5.7.10/</i></span> (or your equivalent), and install (you must be root):
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> .<span class="sy0">/</span>install.sh</pre></div></div>
+<p>Now, go to the directory where you extracted the PrimeSense drivers (<span style="color:#FF8C00"><i>Sensor-master/</i></span> for me), and repeat the exact same procedure (go to <span style="color:#FF8C00"><i>Platform/Linux/CreateRedist/</i></span>, issue <span style="color:#228B22"><i>./RedistMaker</i></span>, go to <span style="color:#FF8C00"><i>Platform/Linux/Redist/Sensor-Bin-Linux-x64-v5.1.6.6/</i></span>, issue <span style="color:#228B22"><i>sudo ./install.sh</i></span>). Congratulations, you have now installed OpenNI.
+</p>
+<h4><span class="mw-headline" id="CUDA">CUDA</span></h4>
+<p>Like OpenNI, <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/CUDA">nVidia CUDA</a> is an optional dependency, that will allow PCL to use your GPU (Graphics Processing Unit, that is, your graphics card) for certain computations. This is mandatory for tools like KinFu (do not bother unless you have at least a series 400 card with 1.5 GB of VRAM).
+</p><p>Some distributions provide packages for CUDA in the repositories. For example, in Ubuntu:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> nvidia-cuda-dev nvidia-cuda-toolkit</pre></div></div>
+<p>If you want to install it manually (which is incompatible with the previous method), go to the <a rel="nofollow" class="external text" href="https://developer.nvidia.com/cuda-downloads">CUDA downloads</a> page, which is self-explanatory, and get the small .deb file or the huge .run toolkit/SDK installer file for your system (you should have installed the nVidia drivers already, but the installer will also do it for you if needed).
+</p><p>If you chose the .deb file, install it using the method of your choice, like Gdebi package manager, or through console:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">dpkg</span> <span class="re5">-i</span> <span class="sy0">&lt;</span>package.deb<span class="sy0">&gt;</span></pre></div></div>
+<p>The .deb does not contain all CUDA stuff, it just adds their repository to your software lists. Now you must install everything:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> update
+<span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> cuda</pre></div></div>
+<p>If, on the other hand, you downloaded the .run, give it execution permissions:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">chmod</span> +x cuda_7.0.28_linux.run</pre></div></div>
+<p>And install it. You can use the default options, although if you have a working nVidia graphics driver for your card, you may want to say "no" when the installer offers to install it for you:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> .<span class="sy0">/</span>cuda_7.0.28_linux.run</pre></div></div>
+<p>The environment variables need to be changed so your system can find CUDA's libraries and binaries. Open <span style="color:#1E90FF"><i>/etc/ld.so.conf</i></span>:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">nano</span> <span class="sy0">/</span>etc<span class="sy0">/</span>ld.so.conf</pre></div></div>
+<p>And append one of these two lines:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>cuda<span class="sy0">/</span>lib64 <span class="co0"># Add this on 64-bit only.</span>
+<span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>cuda<span class="sy0">/</span>lib <span class="co0"># Add this on 32-bit only.</span></pre></div></div>
+<p>Save with <span style="color:#228B22"><b>Ctrl+O</b></span> and Enter, exit with <span style="color:#228B22"><b>Ctrl+X</b></span>. Reload the cache of the dynamic linker with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> ldconfig</pre></div></div>
+<p>Now, append CUDA's bin directory to your PATH. Do this by editing your local <span style="color:#1E90FF"><i>.bashrc</i></span> file:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">nano</span> ~<span class="sy0">/</span>.bashrc</pre></div></div>
+<p>And append this line:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw3">export</span> <span class="re2">PATH</span>=<span class="re1">$PATH</span>:<span class="sy0">/</span>usr<span class="sy0">/</span>local<span class="sy0">/</span>cuda<span class="sy0">/</span>bin</pre></div></div>
+<p>CUDA is now installed.
+</p>
+<h3><span class="mw-headline" id="Getting_the_source">Getting the source</span></h3>
+<p>Every dependency is installed. Time to download PCL's source code. First, you must choose whether to install the stable or the experimental branch of PCL. The stable branch is the latest official release and it is guaranteed to work without problems. The experimental branch may give you a compiling error seldomly, but you can find some interesting features that stable users will have to wait some months for. Apart from that, both are built the same way.
+</p><p>To get the stable version, go to the <a rel="nofollow" class="external text" href="https://github.com/PointCloudLibrary/pcl/releases">downloads</a> page, get <span style="color:#1E90FF"><i>pcl-pcl-1.7.2.tar.gz</i></span> or whatever the latest release is, and extract it somewhere. For the experimental version, use Git:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> git
+git clone https:<span class="sy0">//</span>github.com<span class="sy0">/</span>PointCloudLibrary<span class="sy0">/</span>pcl PCL-trunk-Source</pre></div></div>
+<p>The compiled trunk version of PCL will take up more than 8 GB. So make sure you put the source folder in a partition with enough free space!
+</p>
+<h3><span class="mw-headline" id="Compiling">Compiling</span></h3>
+<p>Go the the PCL source directory (<span style="color:#FF8C00"><i>pcl-pcl-1.7.2/</i></span> or <span style="color:#FF8C00"><i>PCL-trunk-Source/</i></span>), and create a new subdirectory to keep the build files in:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">mkdir</span> build
+<span class="kw3">cd</span> build</pre></div></div>
+<p>Now it is time to configure the project using CMake. We will tell it to build in Release (fully optimized, no debug capabilities) mode now, and customize the rest of the options later:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">cmake -DCMAKE_BUILD_TYPE=Release ..</pre></div></div>
+<p>CMake should be able to find every dependency, thus being able to build every subsystem except for the ones marked as <span style="color:#FF1493"><i>"Disabled by default"</i></span>. If you are happy, you can build now, otherwise let's invoke CMake's curses interface to change a couple of things (mind the final dot):
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">ccmake .</pre></div></div>
+<p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:902px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Ccmake_GUI_PCL.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/Ccmake_GUI_PCL.png" width="900" height="550" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Ccmake_GUI_PCL.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Interface of <i>ccmake</i>.</div></div></div></div>
+<p><br>
+Here you can change the build options. The program usage can be found at the bottom of the screen. Try turning all functionality <span style="color:#FF1493">"ON"</span>. The most important thing, in case you want to use CUDA, is to enable it and give CMake the path to your SDK. Go to the <span style="color:#FF1493">"CUDA_SDK_ROOT_DIR"</span> option and enter the correct path (probably <span style="color:#FF8C00"><i>/usr/local/cuda/</i></span> or similar).
+</p><p>When you are done, press <span style="color:#228B22"><b>C</b></span> to configure and <span style="color:#228B22"><b>G</b></span> to generate and exit the tool. Sometimes, the options you change can activate previously omitted parameters, or prompt some warning text. Just press <span style="color:#228B22"><b>E</b></span> when you are finished reading the message, and keep pressing <span style="color:#228B22"><b>C</b></span> until it lets you generate (new parameters will be marked with an asterisk, so you can check them and decide whether or not you want further customization).
+</p><p>If you are done configuring, it is time to build:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">make</span></pre></div></div>
+<p><span style="color:#606060"><i><b>NOTE: Additionally, you can append the parameter -jX to speed up the compilation, X being the number of cores or processors of your PC, plus one.</b></i></span>
+</p><p>Remember that, at any time, you can manually force the project to be reconfigured and built from scratch by emptying the <span style="color:#FF8C00"><i>build/</i></span> directory with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">rm</span> <span class="re5">-rf</span> .<span class="sy0">/*</span></pre></div></div>
+<h3><span class="mw-headline" id="Installing">Installing</span></h3>
+<p>It will take some time to compile PCL (up to a few hours if your PC is not powerful enough). When it is finished, install it system-wide with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">make</span> <span class="kw2">install</span></pre></div></div>
+<p>And you should reboot and proceed to the next section, to see if your computer now recognizes (and uses) your Kinect device.
+</p>
+<h1><span class="mw-headline" id="Testing_.28OpenNI_viewer.29">Testing (OpenNI viewer)</span></h1>
+<p>We are going to write a simple example program that will fetch data from the Kinect or Xtion and present it to the user, using the PCL library. It will also allow to save the current frame (as point cloud) to disk. If you feel lazy, you can download it <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_openni_viewer.tar.gz">here</a>, and skip the next two sections. Otherwise, create a new directory anywhere in your hard disk and proceed.
+</p>
+<h2><span class="mw-headline" id="CMakeLists.txt">CMakeLists.txt</span></h2>
+<p>Inside that directory, create a new text file named <span style="color:#1E90FF"><i>CMakeLists.txt</i></span>. PCL-based programs use the CMake build system, too. Open it with any editor and paste the following content:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cmake source-cmake" style="font-family:monospace;"><pre class="de1"><span class="kw1">cmake_minimum_required</span><span class="sy0">(</span><span class="kw3">VERSION</span> 2.8 <span class="kw3">FATAL_ERROR</span><span class="sy0">)</span>
+&nbsp;
+<span class="kw1">project</span><span class="sy0">(</span>PCL_openni_viewer<span class="sy0">)</span>
+&nbsp;
+<span class="kw1">find_package</span><span class="sy0">(</span>PCL 1.7 REQUIRED<span class="sy0">)</span>
+&nbsp;
+<span class="kw1">include_directories</span><span class="sy0">(</span><span class="re0">${PCL_INCLUDE_DIRS}</span><span class="sy0">)</span>
+<span class="kw1">link_directories</span><span class="sy0">(</span><span class="re0">${PCL_LIBRARY_DIRS}</span><span class="sy0">)</span>
+<span class="kw1">add_definitions</span><span class="sy0">(</span><span class="re0">${PCL_DEFINITIONS}</span><span class="sy0">)</span>
+&nbsp;
+<span class="kw1">set</span><span class="sy0">(</span>PCL_BUILD_TYPE Release<span class="sy0">)</span>
+&nbsp;
+<span class="kw1">file</span><span class="sy0">(</span>GLOB PCL_openni_viewer_SRC
+    <span class="st0">"src/*.h"</span>
+    <span class="st0">"src/*.cpp"</span>
+<span class="sy0">)</span>
+<span class="kw1">add_executable</span><span class="sy0">(</span>openniViewer <span class="re0">${PCL_openni_viewer_SRC}</span><span class="sy0">)</span>
+&nbsp;
+<span class="kw1">target_link_libraries</span> <span class="sy0">(</span>openniViewer <span class="re0">${PCL_LIBRARIES}</span><span class="sy0">)</span></pre></div></div>
+<p>CMake syntax is quite self-explanatory. We ask for a CMake version 2.8 installation, minimum. We declare a new project named <span style="color:#FF1493">"openni_PCL_viewer"</span>. We tell CMake to check for the presence of PCL library development files, version 1.7. If our system can not meet the CMake and PCL version requirement, the process will fail.
+</p><p>Next, we feed the compiler and linker the directories where PCL includes and libraries can be found, and the defined symbols. We tell CMake to use the <span style="color:#FF1493">"Release"</span> build type, which will activate certain optimizations depending on the compiler we use. Other build types are available, like <span style="color:#FF1493">"Debug"</span>, <span style="color:#FF1493">"MinSizeRel"</span>, and <span style="color:#FF1493">"RelWithDebInfo"</span>.
+</p><p>Finally, we create a variable, <span style="color:#FF1493">"opennipclviewer_SRC"</span>, that will store a list of files to be compiled (though we will only have one). We create a new binary to be compiled from these source files, and we link it with the PCL library.
+</p><p>Check the <a rel="nofollow" class="external text" href="http://www.cmake.org/Wiki/CMake_Useful_Variables">CMake help</a> for more interesting options.
+</p>
+<h2><span class="mw-headline" id="main.cpp">main.cpp</span></h2>
+<p>We told CMake it could find the source files in a <span style="color:#FF8C00"><i>src/</i></span> subdirectory, so let's keep to out word and create it. Then, add a new <span style="color:#1E90FF"><i>main.cpp</i></span> file inside and paste the following lines:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co1">// Original code by Geoffrey Biggs, taken from the PCL tutorial in</span>
+<span class="co1">// http://pointclouds.org/documentation/tutorials/pcl_visualizer.php</span>
+&nbsp;
+<span class="co1">// Simple OpenNI viewer that also allows to write the current scene to a .pcd</span>
+<span class="co1">// when pressing SPACE.</span>
+&nbsp;
+<span class="co2">#include &lt;pcl/io/openni_grabber.h&gt;</span>
+<span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/visualization/cloud_viewer.h&gt;</span>
+<span class="co2">#include &lt;pcl/console/parse.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+&nbsp;
+<span class="kw2">using</span> <span class="kw2">namespace</span> std<span class="sy4">;</span>
+<span class="kw2">using</span> <span class="kw2">namespace</span> pcl<span class="sy4">;</span>
+&nbsp;
+PointCloud<span class="sy1">&lt;</span>PointXYZRGBA<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> cloudptr<span class="br0">(</span><span class="kw3">new</span> PointCloud<span class="sy1">&lt;</span>PointXYZRGBA<span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span> <span class="co1">// A cloud that will store color info.</span>
+PointCloud<span class="sy1">&lt;</span>PointXYZ<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> fallbackCloud<span class="br0">(</span><span class="kw3">new</span> PointCloud<span class="sy1">&lt;</span>PointXYZ<span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>    <span class="co1">// A fallback cloud with just depth data.</span>
+boost<span class="sy4">::</span><span class="me2">shared_ptr</span><span class="sy1">&lt;</span>visualization<span class="sy4">::</span><span class="me2">CloudViewer</span><span class="sy1">&gt;</span> viewer<span class="sy4">;</span>                 <span class="co1">// Point cloud viewer object.</span>
+Grabber<span class="sy2">*</span> openniGrabber<span class="sy4">;</span>                                               <span class="co1">// OpenNI grabber that takes data from the device.</span>
+<span class="kw4">unsigned</span> <span class="kw4">int</span> filesSaved <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span>                                          <span class="co1">// For the numbering of the clouds saved to disk.</span>
+<span class="kw4">bool</span> saveCloud<span class="br0">(</span><span class="kw2">false</span><span class="br0">)</span>, noColor<span class="br0">(</span><span class="kw2">false</span><span class="br0">)</span><span class="sy4">;</span>                                <span class="co1">// Program control.</span>
+&nbsp;
+<span class="kw4">void</span>
+printUsage<span class="br0">(</span><span class="kw4">const</span> <span class="kw4">char</span><span class="sy2">*</span> programName<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Usage: "</span> <span class="sy1">&lt;&lt;</span> programName <span class="sy1">&lt;&lt;</span> <span class="st0">" [options]"</span>
+		 <span class="sy1">&lt;&lt;</span> endl
+		 <span class="sy1">&lt;&lt;</span> endl
+		 <span class="sy1">&lt;&lt;</span> <span class="st0">"Options:<span class="es1">\n</span>"</span>
+		 <span class="sy1">&lt;&lt;</span> endl
+		 <span class="sy1">&lt;&lt;</span> <span class="st0">"<span class="es1">\t</span>&lt;none&gt;     start capturing from an OpenNI device.<span class="es1">\n</span>"</span>
+		 <span class="sy1">&lt;&lt;</span> <span class="st0">"<span class="es1">\t</span>-v FILE    visualize the given .pcd file.<span class="es1">\n</span>"</span>
+		 <span class="sy1">&lt;&lt;</span> <span class="st0">"<span class="es1">\t</span>-h         shows this help.<span class="es1">\n</span>"</span><span class="sy4">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// This function is called every time the device has new data.</span>
+<span class="kw4">void</span>
+grabberCallback<span class="br0">(</span><span class="kw4">const</span> PointCloud<span class="sy1">&lt;</span>PointXYZRGBA<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">ConstPtr</span><span class="sy3">&amp;</span> cloud<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="kw1">if</span> <span class="br0">(</span><span class="sy3">!</span> viewer<span class="sy2">-</span><span class="sy1">&gt;</span>wasStopped<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+		viewer<span class="sy2">-</span><span class="sy1">&gt;</span>showCloud<span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>saveCloud<span class="br0">)</span>
+	<span class="br0">{</span>
+		stringstream stream<span class="sy4">;</span>
+		stream <span class="sy1">&lt;&lt;</span> <span class="st0">"inputCloud"</span> <span class="sy1">&lt;&lt;</span> filesSaved <span class="sy1">&lt;&lt;</span> <span class="st0">".pcd"</span><span class="sy4">;</span>
+		string filename <span class="sy1">=</span> stream.<span class="me1">str</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw1">if</span> <span class="br0">(</span>io<span class="sy4">::</span><span class="me2">savePCDFile</span><span class="br0">(</span>filename, <span class="sy2">*</span>cloud, <span class="kw2">true</span><span class="br0">)</span> <span class="sy1">==</span> 0<span class="br0">)</span>
+		<span class="br0">{</span>
+			filesSaved<span class="sy2">++</span><span class="sy4">;</span>
+			<span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Saved "</span> <span class="sy1">&lt;&lt;</span> filename <span class="sy1">&lt;&lt;</span> <span class="st0">"."</span> <span class="sy1">&lt;&lt;</span> endl<span class="sy4">;</span>
+		<span class="br0">}</span>
+		<span class="kw1">else</span> PCL_ERROR<span class="br0">(</span><span class="st0">"Problem saving&nbsp;%s.<span class="es1">\n</span>"</span>, filename.<span class="me1">c_str</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+		saveCloud <span class="sy1">=</span> <span class="kw2">false</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// For detecting when SPACE is pressed.</span>
+<span class="kw4">void</span>
+keyboardEventOccurred<span class="br0">(</span><span class="kw4">const</span> visualization<span class="sy4">::</span><span class="me2">KeyboardEvent</span><span class="sy3">&amp;</span> event,
+					  <span class="kw4">void</span><span class="sy2">*</span> nothing<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="kw1">if</span> <span class="br0">(</span>event.<span class="me1">getKeySym</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">==</span> <span class="st0">"space"</span> <span class="sy3">&amp;&amp;</span> event.<span class="me1">keyDown</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+		saveCloud <span class="sy1">=</span> <span class="kw2">true</span><span class="sy4">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// Creates, initializes and returns a new viewer.</span>
+boost<span class="sy4">::</span><span class="me2">shared_ptr</span><span class="sy1">&lt;</span>visualization<span class="sy4">::</span><span class="me2">CloudViewer</span><span class="sy1">&gt;</span>
+createViewer<span class="br0">(</span><span class="br0">)</span>
+<span class="br0">{</span>
+	boost<span class="sy4">::</span><span class="me2">shared_ptr</span><span class="sy1">&lt;</span>visualization<span class="sy4">::</span><span class="me2">CloudViewer</span><span class="sy1">&gt;</span> v
+	<span class="br0">(</span><span class="kw3">new</span> visualization<span class="sy4">::</span><span class="me2">CloudViewer</span><span class="br0">(</span><span class="st0">"OpenNI viewer"</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	v<span class="sy2">-</span><span class="sy1">&gt;</span>registerKeyboardCallback<span class="br0">(</span>keyboardEventOccurred<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">return</span> <span class="br0">(</span>v<span class="br0">)</span><span class="sy4">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="kw1">if</span> <span class="br0">(</span>console<span class="sy4">::</span><span class="me2">find_argument</span><span class="br0">(</span>argc, argv, <span class="st0">"-h"</span><span class="br0">)</span> <span class="sy1">&gt;=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		printUsage<span class="br0">(</span>argv<span class="br0">[</span>0<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="kw4">bool</span> justVisualize<span class="br0">(</span><span class="kw2">false</span><span class="br0">)</span><span class="sy4">;</span>
+	string filename<span class="sy4">;</span>
+	<span class="kw1">if</span> <span class="br0">(</span>console<span class="sy4">::</span><span class="me2">find_argument</span><span class="br0">(</span>argc, argv, <span class="st0">"-v"</span><span class="br0">)</span> <span class="sy1">&gt;=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">if</span> <span class="br0">(</span>argc <span class="sy3">!</span><span class="sy1">=</span> 3<span class="br0">)</span>
+		<span class="br0">{</span>
+			printUsage<span class="br0">(</span>argv<span class="br0">[</span>0<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+			<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+		<span class="br0">}</span>
+&nbsp;
+		filename <span class="sy1">=</span> argv<span class="br0">[</span>2<span class="br0">]</span><span class="sy4">;</span>
+		justVisualize <span class="sy1">=</span> <span class="kw2">true</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>argc <span class="sy3">!</span><span class="sy1">=</span> 1<span class="br0">)</span>
+	<span class="br0">{</span>
+		printUsage<span class="br0">(</span>argv<span class="br0">[</span>0<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// First mode, open and show a cloud from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>justVisualize<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="co1">// Try with color information...</span>
+		<span class="kw2">try</span>
+		<span class="br0">{</span>
+			io<span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>PointXYZRGBA<span class="sy1">&gt;</span><span class="br0">(</span>filename.<span class="me1">c_str</span><span class="br0">(</span><span class="br0">)</span>, <span class="sy2">*</span>cloudptr<span class="br0">)</span><span class="sy4">;</span>
+		<span class="br0">}</span>
+		<span class="kw2">catch</span> <span class="br0">(</span>PCLException e1<span class="br0">)</span>
+		<span class="br0">{</span>
+			<span class="kw2">try</span>
+			<span class="br0">{</span>
+				<span class="co1">// ...and if it fails, fall back to just depth.</span>
+				io<span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>PointXYZ<span class="sy1">&gt;</span><span class="br0">(</span>filename.<span class="me1">c_str</span><span class="br0">(</span><span class="br0">)</span>, <span class="sy2">*</span>fallbackCloud<span class="br0">)</span><span class="sy4">;</span>
+			<span class="br0">}</span>
+			<span class="kw2">catch</span> <span class="br0">(</span>PCLException e2<span class="br0">)</span>
+			<span class="br0">{</span>
+				<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+			<span class="br0">}</span>
+&nbsp;
+			noColor <span class="sy1">=</span> <span class="kw2">true</span><span class="sy4">;</span>
+		<span class="br0">}</span>
+&nbsp;
+		<span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Loaded "</span> <span class="sy1">&lt;&lt;</span> filename <span class="sy1">&lt;&lt;</span> <span class="st0">"."</span> <span class="sy1">&lt;&lt;</span> endl<span class="sy4">;</span>
+		<span class="kw1">if</span> <span class="br0">(</span>noColor<span class="br0">)</span>
+			<span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"This cloud has no RGBA color information present."</span> <span class="sy1">&lt;&lt;</span> endl<span class="sy4">;</span>
+		<span class="kw1">else</span> <span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"This cloud has RGBA color information present."</span> <span class="sy1">&lt;&lt;</span> endl<span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="co1">// Second mode, start fetching and displaying frames from the device.</span>
+	<span class="kw1">else</span>
+	<span class="br0">{</span>
+		openniGrabber <span class="sy1">=</span> <span class="kw3">new</span> OpenNIGrabber<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw1">if</span> <span class="br0">(</span>openniGrabber <span class="sy1">==</span> 0<span class="br0">)</span>
+			<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+		boost<span class="sy4">::</span><span class="me2">function</span><span class="sy1">&lt;</span><span class="kw4">void</span> <span class="br0">(</span><span class="kw4">const</span> PointCloud<span class="sy1">&lt;</span>PointXYZRGBA<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">ConstPtr</span><span class="sy3">&amp;</span><span class="br0">)</span><span class="sy1">&gt;</span> f <span class="sy1">=</span>
+			boost<span class="sy4">::</span><span class="me2">bind</span><span class="br0">(</span><span class="sy3">&amp;</span>grabberCallback, _1<span class="br0">)</span><span class="sy4">;</span>
+		openniGrabber<span class="sy2">-</span><span class="sy1">&gt;</span>registerCallback<span class="br0">(</span>f<span class="br0">)</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	viewer <span class="sy1">=</span> createViewer<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>justVisualize<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">if</span> <span class="br0">(</span>noColor<span class="br0">)</span>
+			viewer<span class="sy2">-</span><span class="sy1">&gt;</span>showCloud<span class="br0">(</span>fallbackCloud<span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw1">else</span> viewer<span class="sy2">-</span><span class="sy1">&gt;</span>showCloud<span class="br0">(</span>cloudptr<span class="br0">)</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">else</span> openniGrabber<span class="sy2">-</span><span class="sy1">&gt;</span>start<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Main loop.</span>
+	<span class="kw1">while</span> <span class="br0">(</span><span class="sy3">!</span> viewer<span class="sy2">-</span><span class="sy1">&gt;</span>wasStopped<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+		boost<span class="sy4">::</span><span class="me2">this_thread</span><span class="sy4">::</span><span class="me2">sleep</span><span class="br0">(</span>boost<span class="sy4">::</span><span class="me2">posix_time</span><span class="sy4">::</span><span class="me2">seconds</span><span class="br0">(</span>1<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span><span class="sy3">!</span> justVisualize<span class="br0">)</span>
+		openniGrabber<span class="sy2">-</span><span class="sy1">&gt;</span>stop<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<p>Save and close.
+</p>
+<h2><span class="mw-headline" id="Compiling_2">Compiling</span></h2>
+<p>Follow the same steps you used to build PCL. That is, create a new <span style="color:#FF8C00"><i>build/</i></span> subdirectory next to the <span style="color:#FF8C00"><i>src/</i></span> one. Open a terminal there and issue:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">cmake -DCMAKE_BUILD_TYPE=Release ..
+<span class="kw2">make</span></pre></div></div>
+<h2><span class="mw-headline" id="Executing">Executing</span></h2>
+<p>Still from the same terminal, run the compiled example program:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">.<span class="sy0">/</span>openniViewer</pre></div></div>
+<p>After some seconds, the main window will appear and the application will start grabbing frames from the device. You can inspect the current point cloud using the mouse, holding the left button to rotate, the right one (or the mouse wheel) to zoom, and the middle one to pan the camera around. At first, you may see only a black screen, or some big colored axes, but no cloud. Try zooming out, to see the whole scene. Another useful key is <span style="color:#228B22"><b>R</b></span>, which will reset the camera parameters when pressed. Use it whenever you notice that zooming has gotten slow after some camera movement, or if you still can not see the cloud. See the <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/pcl_visualizer.php">PCLVisualizer</a> tutorial for additional controls and features.
+</p><p>Whenever you feel ready, press the <span style="color:#228B22"><b>SPACE</b></span> key. The program will pause for a fraction of a second and the output <span style="color:#FF1493"><i>"Saved inputCloud0.pcd."</i></span> will appear on the console. Check the current folder to see that file <span style="color:#1E90FF"><i>inputCloud0.pcd</i></span> has indeed been written. You can now close the program with <span style="color:#228B22"><b>Q</b></span> or <span style="color:#228B22"><b>Alt+F4</b></span>.
+</p><p>Next, run it again giving the following parameter:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">.<span class="sy0">/</span>openniViewer <span class="re5">-v</span> inputCloud0.pcd</pre></div></div>
+<p>This will tell the program not to take data from the device, but from the saved point cloud file instead. After it loads, you will realize that you are presented the same scene you saved to disk.
+</p><p><span style="color:#606060"><i><b>NOTE: PCD data is saved relative to the sensor. No matter how much you have manipulated the view, it will reset to default when you load the file.</b></i></span>
+</p>
+<h1><span class="mw-headline" id="Conclusion">Conclusion</span></h1>
+<p>At this point, your Kinect device should be working and getting depth data for you. There is a collection of excellent <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/">tutorials</a> for PCL in the official webpage. I encourage you to finish them all before proceeding your experiments with the Kinect sensor. You can also find a good introduction/tutorial at the PCL library <a rel="nofollow" class="external text" href="http://www.pointclouds.org/assets/uploads/PCL-IAS13_Introduction.pdf">here</a>.
+</p><p>If you use an ASUS Xtion PRO device instead, you should have gotten everything to work without problems or additional steps (except maybe for <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#ASUS_Xtion_PRO" title="PCL/OpenNI troubleshooting"> this one</a>).
+</p><p><br>
+</p>
+<hr>
+<hr>
+<p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p><p>Links to articles:
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics" title="PCL/OpenNI tutorial 0: The very basics">PCL/OpenNI tutorial 0: The very basics</a>
+</p><p><strong class="selflink">PCL/OpenNI tutorial 1: Installing and testing</strong>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)" title="PCL/OpenNI tutorial 2: Cloud processing (basic)">PCL/OpenNI tutorial 2: Cloud processing (basic)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">PCL/OpenNI tutorial 3: Cloud processing (advanced)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">PCL/OpenNI tutorial 4: 3D object recognition (descriptors)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)" title="PCL/OpenNI tutorial 5: 3D object recognition (pipeline)">PCL/OpenNI tutorial 5: 3D object recognition (pipeline)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting" title="PCL/OpenNI troubleshooting">PCL/OpenNI troubleshooting</a>
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.466 seconds
+Real time usage: 0.470 seconds
+Preprocessor visited node count: 444/1000000
+Preprocessor generated node count: 894/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:111-0!*!0!!en!2!* and timestamp 20150622114252
+ -->
+</div>								<div class="printfooter">
+				Retrieved from "<a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&oldid=4694">http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&amp;oldid=4694</a>"				</div>
+												<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+				<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+	<h3 id="p-personal-label">Personal tools</h3>
+	<ul>
+<li id="pt-login"><a href="http://robotica.unileon.es/mediawiki/index.php?title=Special:UserLogin&returnto=PCL%2FOpenNI+tutorial+1%3A+Installing+and+testing" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>	</ul>
+</div>
+				<div id="left-navigation">
+					<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+	<h3 id="p-namespaces-label">Namespaces</h3>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE.html" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk" class="new"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=Talk:PCL/OpenNI_tutorial_1:_Installing_and_testing&action=edit&redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+	<h3 id="mw-vector-current-variant">
+		</h3>
+	<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+				</div>
+				<div id="right-navigation">
+					<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+	<h3 id="p-views-label">Views</h3>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE.html">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+	<h3 id="p-cactions-label" tabindex="0"><span>Actions</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+<div id="p-search" role="search">
+	<h3><label for="searchInput">Search</label></h3>
+	<form action="http://robotica.unileon.es/mediawiki/index.php" id="searchform">
+				<div id="simpleSearch">
+						<input name="search" placeholder="Search" title="Search Robótica - ULE [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off">						<button type="submit" name="button" title="Search the pages for this text" id="searchButton"><img src="./PCL_OpenNI tutorial 1_ Installing and testing - Robótica - ULE_files/search-ltr.png" alt="Search" width="12" height="13"></button>								<input type="hidden" name="title" value="Special:Search">
+		</div>
+	</form>
+</div>
+				</div>
+			</div>
+			<div id="mw-panel" class="collapsible-nav">
+					<div id="p-logo" role="banner"><a style="background-image: url(/mediawiki/skins/common/images/LogoRobotica_small.png);" href="http://robotica.unileon.es/mediawiki/index.php/Home" title="Visit the main page"></a></div>
+				<div class="portal first persistent" role="navigation" id="p-Contents" aria-labelledby="p-Contents-label">
+	<h3 id="p-Contents-label">Contents</h3>
+	<div class="body">
+		<ul>
+			<li id="n-Home"><a href="http://robotica.unileon.es/mediawiki/index.php/Home">Home</a></li>
+			<li id="n-People"><a href="http://robotica.unileon.es/mediawiki/index.php/People">People</a></li>
+			<li id="n-Publications"><a href="http://robotica.unileon.es/mediawiki/index.php/Publications">Publications</a></li>
+			<li id="n-Activities"><a href="http://robotica.unileon.es/mediawiki/index.php/Activities">Activities</a></li>
+			<li id="n-Projects"><a href="http://robotica.unileon.es/mediawiki/index.php/Projects">Projects</a></li>
+			<li id="n-Software"><a href="http://robotica.unileon.es/mediawiki/index.php/Software">Software</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal expanded" role="navigation" id="p-Wiki" aria-labelledby="p-Wiki-label">
+	<h3 id="p-Wiki-label" tabindex="2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#">Wiki</a></h3>
+	<div class="body" style="display: block;">
+		<ul>
+			<li id="n-recentchanges"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-randompage"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+			<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" rel="nofollow" title="The place to find out">Help</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+	<h3 id="p-tb-label" tabindex="3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing#">Tools</a></h3>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:WhatLinksHere/PCL/OpenNI_tutorial_1:_Installing_and_testing" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChangesLinked/PCL/OpenNI_tutorial_1:_Installing_and_testing" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li id="t-print"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+			<li id="t-permalink"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&oldid=4694" title="Permanent link to this revision of the page">Permanent link</a></li>
+			<li id="t-info"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_1:_Installing_and_testing&action=info">Page information</a></li>
+		</ul>
+	</div>
+</div>
+			</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 May 2015, at 09:26.</li>
+											<li id="footer-info-viewcount">This page has been accessed 76,949 times.</li>
+									</ul>
+									<div style="clear:both"></div>
+		</div>
+		<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","skins.vector.collapsibleNav"],null,true);
+}</script>
+<script>if(window.mw){
+mw.loader.state({"site":"ready"});
+}</script>
+<!-- Served in 0.089 secs. -->
+	
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

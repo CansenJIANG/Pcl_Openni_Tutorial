@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<!-- saved from url=(0102)http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline) -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8"><title>PCL/OpenNI tutorial 5: 3D object recognition (pipeline) - Robótica - ULE</title>
+<meta name="generator" content="MediaWiki 1.22.5">
+<link rel="shortcut icon" href="http://robotica.unileon.es/mediawiki/skins/common/images/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://robotica.unileon.es/mediawiki/opensearch_desc.php" title="Robótica - ULE (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://robotica.unileon.es/mediawiki/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="Robótica - ULE Atom feed" href="http://robotica.unileon.es/mediawiki/index.php?title=Special:RecentChanges&feed=atom">
+<link rel="stylesheet" href="http://robotica.unileon.es/mediawiki/load.php?debug=false&lang=en&modules=ext.geshi.local%7Cmediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&only=styles&skin=vector&*">
+<style>
+.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:4250852ed2349a0d4d0fc6509a3e7d4c */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.autoellipsis-matched,.highlight{font-weight:bold}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9780324491b653a3780e2d029bdc140c */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;-webkit-box-shadow:0 2px 5px 0 #ccc;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(http://robotica.unileon.es/mediawiki/resources/mediawiki.action/images/green-checkmark.png?2014-04-10T08:01:40Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9b39df22efb31003b8c266f2194113b0 */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{text-decoration:none;color:black}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:52b1797f70c7e4094dfa4191101944e8 */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:c2f15db357ed1b34653e004540bd5f70 */</style>
+
+<script src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/load.php"></script><script src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/load(1).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)","wgTitle":"PCL/OpenNI tutorial 5: 3D object recognition (pipeline)","wgCurRevisionId":4683,"wgRevisionId":4683,"wgArticleId":429,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)","wgIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"vector-simplesearch":1,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,
+"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: wikidb:resourceloader:filter:minify-js:7:5a69c7e0fa6557851b6dea8a62efaffb */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/load(2).php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/mediawiki/skins/vector/csshover.min.htc")}</style><![endif]--><script async="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/load(3).php"></script></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PCL_OpenNI_tutorial_5_3D_object_recognition_pipeline skin-vector action-view vector-animateLayout">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">PCL/OpenNI tutorial 5: 3D object recognition (pipeline)</span></h1>
+			<div id="bodyContent">
+								<div id="siteSub">From Robótica - ULE</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#mw-navigation">navigation</a>, 					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p>
+<hr>
+<hr>
+<p><br>
+In our <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">previous article</a> we saw how 3D descriptors could be used to identify points or clusters. But in order to have a working object recognition system, many more things are necessary. The sequence of steps that we have to implement to make such a system is known as the <i>pipeline</i>. This final article will explain how to do it. The scope of what we will talk about is very wide and many has been written, so you should consider this a simple introductory tutorial, to build a basic knowledge so you can experiment further.
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Training"><span class="tocnumber">2</span> <span class="toctext">Training</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Getting_a_full_model"><span class="tocnumber">2.1</span> <span class="toctext">Getting a full model</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Raytracing"><span class="tocnumber">2.1.1</span> <span class="toctext">Raytracing</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Sampling"><span class="tocnumber">2.1.2</span> <span class="toctext">Sampling</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-6"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Getting_partial_views"><span class="tocnumber">2.2</span> <span class="toctext">Getting partial views</span></a>
+<ul>
+<li class="toclevel-3 tocsection-7"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Tool"><span class="tocnumber">2.2.1</span> <span class="toctext">Tool</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Code"><span class="tocnumber">2.2.2</span> <span class="toctext">Code</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Local_pipeline"><span class="tocnumber">3</span> <span class="toctext">Local pipeline</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Keypoint_extraction"><span class="tocnumber">3.1</span> <span class="toctext">Keypoint extraction</span></a>
+<ul>
+<li class="toclevel-3 tocsection-11"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#ISS"><span class="tocnumber">3.1.1</span> <span class="toctext">ISS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-12"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Computing_descriptors"><span class="tocnumber">3.2</span> <span class="toctext">Computing descriptors</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Matching"><span class="tocnumber">3.3</span> <span class="toctext">Matching</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Correspondence_grouping"><span class="tocnumber">3.4</span> <span class="toctext">Correspondence grouping</span></a>
+<ul>
+<li class="toclevel-3 tocsection-15"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Geometric_consistency"><span class="tocnumber">3.4.1</span> <span class="toctext">Geometric consistency</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Hough_voting"><span class="tocnumber">3.4.2</span> <span class="toctext">Hough voting</span></a>
+<ul>
+<li class="toclevel-4 tocsection-17"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Computing_Reference_Frames"><span class="tocnumber">3.4.2.1</span> <span class="toctext">Computing Reference Frames</span></a></li>
+<li class="toclevel-4 tocsection-18"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Clustering"><span class="tocnumber">3.4.2.2</span> <span class="toctext">Clustering</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-19"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Pose_estimation"><span class="tocnumber">3.5</span> <span class="toctext">Pose estimation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-20"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Global_pipeline"><span class="tocnumber">4</span> <span class="toctext">Global pipeline</span></a>
+<ul>
+<li class="toclevel-2 tocsection-21"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Segmentation"><span class="tocnumber">4.1</span> <span class="toctext">Segmentation</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Computing_descriptors_2"><span class="tocnumber">4.2</span> <span class="toctext">Computing descriptors</span></a>
+<ul>
+<li class="toclevel-3 tocsection-23"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#CRH"><span class="tocnumber">4.2.1</span> <span class="toctext">CRH</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-24"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Matching_2"><span class="tocnumber">4.3</span> <span class="toctext">Matching</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Pose_estimation_2"><span class="tocnumber">4.4</span> <span class="toctext">Pose estimation</span></a>
+<ul>
+<li class="toclevel-3 tocsection-26"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#CRH_2"><span class="tocnumber">4.4.1</span> <span class="toctext">CRH</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-27"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Postprocessing"><span class="tocnumber">5</span> <span class="toctext">Postprocessing</span></a>
+<ul>
+<li class="toclevel-2 tocsection-28"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Pose_refinement"><span class="tocnumber">5.1</span> <span class="toctext">Pose refinement</span></a></li>
+<li class="toclevel-2 tocsection-29"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Hypothesis_verification"><span class="tocnumber">5.2</span> <span class="toctext">Hypothesis verification</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Overview">Overview</span></h1>
+<p>Ideally, a 3D object recognition system should be able to grab clouds from the device, preprocess them, compute descriptors, compare them with the ones stored in our object database, and output all matches with their position and orientation in the scene, in real time. Several components must then be implemented to perform these sequential steps, each one taking as input the output of the previous. This pipeline will be different depending on what type of descriptor we are using: local or global.
+</p><p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:802px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:3D_recognition_pipeline.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/3D_recognition_pipeline.png" width="800" height="211" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:3D_recognition_pipeline.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Example of local and global 3D recognition pipelines in PCL (image from <a rel="nofollow" class="external text" href="http://www.inf.ethz.ch/personal/zeislb/publications/aldoma_2012jram_PCLTutorial.pdf">this paper</a>).</div></div></div></div>
+<p><br>
+First of all, we have to <i>train</i> the system. Training means, in this case, creating a database will all the objects we want to be able to recognize, and the descriptors for every associated pose. Only after that we can implement the recognition pipeline. Also, there are some postprocessing steps that are not mandatory to perform but will yield better results if done, like pose refinement and hypothesis verification.
+</p><p>In the next sections we will go over every step, with some PCL code snippets, as always.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Tutorials</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://www.pointclouds.org/assets/uploads/cglibs13_recognition.pdf">3D Object Recognition and 6DOF Pose Estimation</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://www.pointclouds.org/assets/icra2013/ensembles.pdf">Ensemble Learning for Object Recognition and Pose Estimation</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://www.pointclouds.org/assets/uploads/PCL-IAS13_Recognition.pdf">3D Object Recognition in Clutter with the Point Cloud Library</a>
+</li>
+</ul>
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://www.inf.ethz.ch/personal/zeislb/publications/aldoma_2012jram_PCLTutorial.pdf">Point Cloud Library: Three-Dimensional Object Recognition and 6 DoF Pose Estimation</a> (Aitor Aldoma et al., 2012)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h1><span class="mw-headline" id="Training">Training</span></h1>
+<p>As stated, we require a database with all the objects we intend to recognize later (it is possible to build a recognition system that works with object categories and high level descriptions, for example to find all things that "look" like a chair in the scene, but that is an entirely different matter). The most common way to do this is to take dozens of snapshots of every object from different angles. This can be done with a device such as a pan-tilt unit (which consists of a mechanical platform that can be rotated on two axes in known, precise amounts), or with a common table and a printed checkerboard pattern on it, to be used as ground truth to get the camera position and orientation. Of course, you need a physical copy of the object first.
+</p><p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:352px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Pan_tilt_unit.jpg" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Pan_tilt_unit.jpg" width="350" height="466" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Pan_tilt_unit.jpg" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Pan-tilt unit (image from <a rel="nofollow" class="external free" href="http://pointclouds.org/">http://pointclouds.org/</a>).</div></div></div></div>
+<p><br>
+Another possibility is to do it virtually, rendering 3D models of the objects (modelled beforehand with CAD software like <a rel="nofollow" class="external text" href="http://www.blender.org/">Blender</a>) and using the Z buffer, which contains the depth information, to simulate the input a depth sensor would give. The perks of doing this include: no segmentation step is necessary to get the object cluster, and the ground truth pose information will be 100% exact.
+</p><p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:602px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Virtual_scanner_tesselated_sphere.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Virtual_scanner_tesselated_sphere.png" width="600" height="268" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Virtual_scanner_tesselated_sphere.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Visualization of the virtual scanning process (image taken from a presentation by <a rel="nofollow" class="external text" href="http://users.acin.tuwien.ac.at/mzillich/?site=0">Michael Zillich</a>).</div></div></div></div>
+<p><br>
+Many 3D object <a rel="nofollow" class="external text" href="http://pointclouds.org/media/">datasets</a> that are available for download have been created with one of these methods. Whichever you choose, be sure to be consistent and take all snapshots uniformly, with the same sampling level (one every X degrees). When choosing this amount, try to make a compromise between the complexity of the database (size is usually not a problem, but the more snapshots you have, the longer it will take to finish the matching step) and the precision of pose estimation.
+</p><p>After this, the desired descriptor(s) must be computed for every snapshot of each object, and saved to disk. If global descriptors are being used, a <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#CRH" title="PCL/OpenNI tutorial 5: 3D object recognition (pipeline)">Camera Roll Histogram</a> (CRH) should be included in order to retrieve the full 6 DoF pose, as many descriptors are invariant to the camera roll angle, which would limit the pose estimation to 5 DoF. Finally, ground truth information about the camera position and orientation will make it possible to compare it against the result given back by the recognition system. Most datasets include such information in text files next to the corresponding snapshot, usually in the form of a 3x3 rotation matrix and a 3D translation vector.
+</p><p>If you are using local descriptors, it is possible to work with a database of full objects, instead of partial snapshots (this can not be done with global descriptors because they are computed from the whole cluster, and a full object is something we would never get in practice; plus, they also encode viewpoint information). To do this, you would have to capture the object from all angles and then use registration or other technique to stitch the clouds together in order to create a complete, continous model. Resampling should also be needed because overlapping areas would have higher point density. Also, as normals are oriented according to the viewpoint when they are computed, you would have to merge them properly so they all point outwards, instead of recomputing them after composing the object cluster. The perk of using full objects is that the matching step will be shorter, as the system will not have to check against the descriptors of multiple snapshots.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Tutorial</b>: <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/vfh_recognition.php">Cluster Recognition and 6DOF Pose Estimation using VFH descriptors</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Getting_a_full_model">Getting a full model</span></h2>
+<p>Like I explained above, getting a full .pcd model for our object with a sensor requires some careful setup, good segmentation, normal computation and possibly resampling. On the other hand, if we use a 3D CAD model, it becomes much easier. A program like <a rel="nofollow" class="external text" href="http://www.blender.org/">Blender</a> (free and open source) can be used to design a model of the object, after taking some measurements. Programs like <a rel="nofollow" class="external text" href="http://meshlab.sourceforge.net/">MeshLab</a> can convert to and from many types of 3D formats. In this case, the one favored by PCL is binary <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/PLY_%28file_format%29">PLY</a> with normals (Blender can export to ASCII PLY, but I have sometimes encountered a processing error with those).
+</p>
+<h3><span class="mw-headline" id="Raytracing">Raytracing</span></h3>
+<p>PCL offers a couple of command line tools to render a .pcd cloud file from a CAD model. The first one does this by raytracing. It uses a 3D sphere or icosahedron that is tesselated (divided in polygonal regions). Then, the virtual camera is placed in each of the vertices (or the polygons' centers) pointing to the origin, where the object model is. Multiple snapshots are rendered, and the final cloud is composed from this information.
+</p><p>You can invoke it like this:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">pcl_mesh2pcd <span class="sy0">&lt;</span>input.ply<span class="sy0">&gt;</span> <span class="sy0">&lt;</span>output.pcd<span class="sy0">&gt;</span></pre></div></div>
+<p>Here you can see the result of converting a mesh exported from Blender, the program's mascot, <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Blender_%28software%29#Suzanne">Suzanne</a>:
+</p><p><br>
+</p>
+<center><ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Pcl_mesh2pcd_example_original.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Pcl_mesh2pcd_example_original.png" width="197" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Original 3D mesh in VTK format.
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Pcl_mesh2pcd_example_result.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Pcl_mesh2pcd_example_result.png" width="197" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Resulting point cloud.
+</p>
+			</div>
+		</div></li>
+</ul></center>
+<p><br>
+The tool has some parameters available, you can check their usage with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">pcl_mesh2pcd <span class="re5">-h</span></pre></div></div>
+<p>For example, one of the parameters controls the size of the voxel grid used to downsample the cloud after the raytracing operation. With this you can regulate the point density of the resulting .pcd file.
+</p>
+<h3><span class="mw-headline" id="Sampling">Sampling</span></h3>
+<p>The second tool we are going to see employs sampling, with a voxel grid. It gets similar results to the previous one. You can invoke it in an identical way:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">pcl_mesh_sampling <span class="sy0">&lt;</span>input.ply<span class="sy0">&gt;</span> <span class="sy0">&lt;</span>output.pcd<span class="sy0">&gt;</span></pre></div></div>
+<p>It has the same parameters as the previous tool. Check the usage with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">pcl_mesh_sampling <span class="re5">-h</span></pre></div></div>
+<h2><span class="mw-headline" id="Getting_partial_views">Getting partial views</span></h2>
+<h3><span class="mw-headline" id="Tool">Tool</span></h3>
+<p>If you need to get a collection of partial snapshots of the model, PCL has also a tool for that. It is the virtual equivalent of using one of those rotating tables I told you about. It works just like <span style="color:#228B22"><i>pcl_mesh2pcd</i></span>, but instead of composing all renders into a single file, it saves each one to its own.
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">pcl_virtual_scanner <span class="sy0">&lt;</span>input.ply<span class="sy0">&gt;</span></pre></div></div>
+<p>Inside a directory, 42 .pcd files will be generated. You can check the usage by invoking it with no parameters; there are a couple of interesting options to add noise to the clouds, in order to better simulate the input from sensors like Kinect. If you need something more flexible (like a custom amount of snapshots, as the program does not let you change the number), see the next section.
+</p>
+<h3><span class="mw-headline" id="Code">Code</span></h3>
+<p>You can customize the snapshot generation process by making direct use of the <span style="color:#FF1493">"RenderViewsTesselatedSphere"</span> class, which is similar to what the previous tool uses internally. The code is the following:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/vtk_lib_io.h&gt;</span>
+<span class="co2">#include &lt;vtkPolyDataMapper.h&gt;</span>
+<span class="co2">#include &lt;pcl/apps/render_views_tesselated_sphere.h&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Load the PLY model from a file.</span>
+	vtkSmartPointer<span class="sy1">&lt;</span>vtkPLYReader<span class="sy1">&gt;</span> reader <span class="sy1">=</span> vtkSmartPointer<span class="sy1">&lt;</span>vtkPLYReader<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">New</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+	reader<span class="sy2">-</span><span class="sy1">&gt;</span>SetFileName<span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+	reader<span class="sy2">-</span><span class="sy1">&gt;</span>Update<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// VTK is not exactly straightforward...</span>
+	vtkSmartPointer <span class="sy1">&lt;</span> vtkPolyDataMapper <span class="sy1">&gt;</span> mapper <span class="sy1">=</span> vtkSmartPointer<span class="sy1">&lt;</span>vtkPolyDataMapper<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">New</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+	mapper<span class="sy2">-</span><span class="sy1">&gt;</span>SetInputConnection<span class="br0">(</span>reader<span class="sy2">-</span><span class="sy1">&gt;</span>GetOutputPort<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	mapper<span class="sy2">-</span><span class="sy1">&gt;</span>Update<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	vtkSmartPointer<span class="sy1">&lt;</span>vtkPolyData<span class="sy1">&gt;</span> object <span class="sy1">=</span> mapper<span class="sy2">-</span><span class="sy1">&gt;</span>GetInput<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Virtual scanner object.</span>
+	pcl<span class="sy4">::</span><span class="me2">apps</span><span class="sy4">::</span><span class="me2">RenderViewsTesselatedSphere</span> render_views<span class="sy4">;</span>
+	render_views.<span class="me1">addModelFromPolyData</span><span class="br0">(</span>object<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Pixel width of the rendering window, it directly affects the snapshot file size.</span>
+	render_views.<span class="me1">setResolution</span><span class="br0">(</span>150<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Horizontal FoV of the virtual camera.</span>
+	render_views.<span class="me1">setViewAngle</span><span class="br0">(</span>57.0f<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// If true, the resulting clouds of the snapshots will be organized.</span>
+	render_views.<span class="me1">setGenOrganized</span><span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// How much to subdivide the icosahedron. Increasing this will result in a lot more snapshots.</span>
+	render_views.<span class="me1">setTesselationLevel</span><span class="br0">(</span>1<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// If true, the camera will be placed at the vertices of the triangles. If false, at the centers.</span>
+	<span class="co1">// This will affect the number of snapshots produced (if true, less will be made).</span>
+	<span class="co1">// True: 42 for level 1, 162 for level 2, 642 for level 3...</span>
+	<span class="co1">// False: 80 for level 1, 320 for level 2, 1280 for level 3...</span>
+	render_views.<span class="me1">setUseVertices</span><span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// If true, the entropies (the amount of occlusions) will be computed for each snapshot (optional).</span>
+	render_views.<span class="me1">setComputeEntropies</span><span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	render_views.<span class="me1">generateViews</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Object for storing the rendered views.</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span><span class="sy1">&gt;</span> views<span class="sy4">;</span>
+	<span class="co1">// Object for storing the poses, as 4x4 transformation matrices.</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span>Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span>, Eigen<span class="sy4">::</span><span class="me2">aligned_allocator</span><span class="sy1">&lt;</span>Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span><span class="sy1">&gt;</span> <span class="sy1">&gt;</span> poses<span class="sy4">;</span>
+	<span class="co1">// Object for storing the entropies (optional).</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span><span class="kw4">float</span><span class="sy1">&gt;</span> entropies<span class="sy4">;</span>
+	render_views.<span class="me1">getViews</span><span class="br0">(</span>views<span class="br0">)</span><span class="sy4">;</span>
+	render_views.<span class="me1">getPoses</span><span class="br0">(</span>poses<span class="br0">)</span><span class="sy4">;</span>
+	render_views.<span class="me1">getEntropies</span><span class="br0">(</span>entropies<span class="br0">)</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<p>At the end of the program, the generated views (as point clouds) and the corresponding poses (transformation matrices) get saved to those vectors, so you can use them as you like (e.g., saving the snapshots to .pcd files and the poses to text files). There is no API documentation available, if you want to know more, check the <span style="color:#1E90FF"><i>render_views_tesselated_sphere.h</i></span> file inside PCL's source folder.
+</p><p>If you get a segmentation fault, check if the .ply file is in ASCII format (you should be able to open and read it with a text editor). If it is, convert it to binary .ply using MeshLab. This usually solves it.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: 3D model, [Resolution], [View angle], [Camera constraints], [Organized], [Sphere size]. [Tesselation level], [Use vertices], [Compute entropies]
+</li>
+<li> <b>Output</b>: Snapshot clouds, Snapshot poses, [Snapshot entropies]
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_snapshot_creator.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h1><span class="mw-headline" id="Local_pipeline">Local pipeline</span></h1>
+<p>The following sections enumerate and explain the steps that compose the object recognition pipeline when using local descriptors.
+</p>
+<h2><span class="mw-headline" id="Keypoint_extraction">Keypoint extraction</span></h2>
+<p>In this step, we have to decide which points from the current cloud will be considered keypoints (and have the local descriptor computed for them). The main characteristics of a good keypoint detector are:
+</p>
+<ul>
+<li> <b>Repeatability</b>: there should be a good chance of the same points being chosen over several iterations, even when the scene is captured from a different angle.
+</li>
+<li> <b>Distinctiveness</b>: the chosen keypoints should be highly characterizing and descriptive. It should be easy to describe and match them.
+</li>
+</ul>
+<p>Because the second one depends on the local descriptor being used (and how the feature is computed), a different keypoint detection technique would have to be implemented for each. Another simple alternative is to perform downsampling on the cloud, and use all remaining points. This can be done easily with <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)#Downsampling" title="PCL/OpenNI tutorial 2: Cloud processing (basic)">downsampling</a>. Follow the link to find a code snippet that you can adapt to use in your system. You can also use the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)#Finding_keypoints" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">NARF keypoint detector</a>.
+</p>
+<h3><span class="mw-headline" id="ISS">ISS</span></h3>
+<p>Another keypoint detector available in PCL is the ISS (Intrinsic Shape Signatures) one. ISS is a local descriptor presented in 2009, which creates a view-independent signature of the local surface patch. An algorithm for choosing keypoints was also included to better fit the descriptor. The algorithm scans the surfaces and chooses only points with large variations in the <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Principal_curvature">principal direction</a> (the shape of the surface), which are ideal for keypoints.
+</p><p>You can use the associated PCL class this way:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/keypoints/iss_3d.h&gt;</span>
+&nbsp;
+<span class="co1">// This function by Tommaso Cavallari and Federico Tombari, taken from the tutorial</span>
+<span class="co1">// http://pointclouds.org/documentation/tutorials/correspondence_grouping.php</span>
+<span class="kw4">double</span>
+computeCloudResolution<span class="br0">(</span><span class="kw4">const</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">ConstPtr</span><span class="sy3">&amp;</span> cloud<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="kw4">double</span> resolution <span class="sy1">=</span> <span class="nu16">0.0</span><span class="sy4">;</span>
+	<span class="kw4">int</span> numberOfPoints <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span>
+	<span class="kw4">int</span> nres<span class="sy4">;</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span><span class="kw4">int</span><span class="sy1">&gt;</span> indices<span class="br0">(</span>2<span class="br0">)</span><span class="sy4">;</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span><span class="kw4">float</span><span class="sy1">&gt;</span> squaredDistances<span class="br0">(</span>2<span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">search</span><span class="sy4">::</span><span class="me2">KdTree</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> tree<span class="sy4">;</span>
+	tree.<span class="me1">setInputCloud</span><span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">size_t</span> i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> i <span class="sy1">&lt;</span> cloud<span class="sy2">-</span><span class="sy1">&gt;</span>size<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span> <span class="sy2">++</span>i<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">if</span> <span class="br0">(</span><span class="sy3">!</span> pcl_isfinite<span class="br0">(</span><span class="br0">(</span><span class="sy2">*</span>cloud<span class="br0">)</span><span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">x</span><span class="br0">)</span><span class="br0">)</span>
+			<span class="kw1">continue</span><span class="sy4">;</span>
+&nbsp;
+		<span class="co1">// Considering the second neighbor since the first is the point itself.</span>
+		nres <span class="sy1">=</span> tree.<span class="me1">nearestKSearch</span><span class="br0">(</span>i, 2, indices, squaredDistances<span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw1">if</span> <span class="br0">(</span>nres <span class="sy1">==</span> 2<span class="br0">)</span>
+		<span class="br0">{</span>
+			resolution <span class="sy2">+</span><span class="sy1">=</span> <span class="kw3">sqrt</span><span class="br0">(</span>squaredDistances<span class="br0">[</span>1<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+			<span class="sy2">++</span>numberOfPoints<span class="sy4">;</span>
+		<span class="br0">}</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>numberOfPoints <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+		resolution <span class="sy2">/</span><span class="sy1">=</span> numberOfPoints<span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">return</span> resolution<span class="sy4">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Objects for storing the point cloud and the keypoints.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> cloud<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> keypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read a PCD file from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>cloud<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// ISS keypoint detector object.</span>
+	pcl<span class="sy4">::</span><span class="me2">ISSKeypoint3D</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> detector<span class="sy4">;</span>
+	detector.<span class="me1">setInputCloud</span><span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">search</span><span class="sy4">::</span><span class="me2">KdTree</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> kdtree<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">search</span><span class="sy4">::</span><span class="me2">KdTree</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	detector.<span class="me1">setSearchMethod</span><span class="br0">(</span>kdtree<span class="br0">)</span><span class="sy4">;</span>
+	<span class="kw4">double</span> resolution <span class="sy1">=</span> computeCloudResolution<span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the radius of the spherical neighborhood used to compute the scatter matrix.</span>
+	detector.<span class="me1">setSalientRadius</span><span class="br0">(</span>6 <span class="sy2">*</span> resolution<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the radius for the application of the non maxima supression algorithm.</span>
+	detector.<span class="me1">setNonMaxRadius</span><span class="br0">(</span>4 <span class="sy2">*</span> resolution<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the minimum number of neighbors that has to be found while applying the non maxima suppression algorithm.</span>
+	detector.<span class="me1">setMinNeighbors</span><span class="br0">(</span>5<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the upper bound on the ratio between the second and the first eigenvalue.</span>
+	detector.<span class="me1">setThreshold21</span><span class="br0">(</span>0.975<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the upper bound on the ratio between the third and the second eigenvalue.</span>
+	detector.<span class="me1">setThreshold32</span><span class="br0">(</span>0.975<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the number of prpcessing threads to use. 0 sets it to automatic.</span>
+	detector.<span class="me1">setNumberOfThreads</span><span class="br0">(</span>4<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	detector.<span class="me1">compute</span><span class="br0">(</span><span class="sy2">*</span>keypoints<span class="br0">)</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points, Search method, Salient radius, Non maxima radius, Minimum neighbors, Eigenvalues thresholds, [Number of threads]
+</li>
+<li> <b>Output</b>: Keypoints
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=5457637">Intrinsic shape signatures: A shape descriptor for 3D object recognition</a> (requires IEEE Xplore subscription) (Yu Zhong, 2009)
+</li>
+</ul>
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_i_s_s_keypoint3_d.html">pcl::ISSKeypoint3D</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_ISS_keypoints.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Computing_descriptors">Computing descriptors</span></h2>
+<p>The next step is to compute the desired local descriptor(s) for every keypoint. The input parameters vary from one to another, and their efectiveness depends on the scene we are capturing and the objects we are working with, so I can not give you an ideal solution. Check the list of <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)#Table" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">available descriptors</a>, choose the one you deem best, and study the original publication to understand how it works and how the computation can be tuned to your needs, with the use of parameters (and try to understand how changing them affects the output). Refer to the given code snippets for each.
+</p>
+<h2><span class="mw-headline" id="Matching">Matching</span></h2>
+<p>After the local descriptor has been computed for every keypoint in the cloud, we have to match them, finding correspondences with the ones we have stored in our object database. For this, a search structure like a <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)#k-d_tree" title="PCL/OpenNI tutorial 2: Cloud processing (basic)"><i>k</i>-d tree</a> can be used to perform a nearest neighbor search, retrieving the Euclidean distances between descriptors (and optionally, enforcing a maximum distance value as a threshold). Every descriptor in the scene should be matched against the descriptors of every model in the database, because this accounts for the presence of multiple instances of the model, which would not be recognized if we did it the other way around.
+</p><p>The following code sample shows how to find all point correspondences between the cloud and a model:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/normal_3d.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/shot.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Object for storing the SHOT descriptors for the scene.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneDescriptors<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Object for storing the SHOT descriptors for the model.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelDescriptors<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read the already computed descriptors from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>sceneDescriptors<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>2<span class="br0">]</span>, <span class="sy2">*</span>modelDescriptors<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// A kd-tree object that uses the FLANN library for fast search of nearest neighbors.</span>
+	pcl<span class="sy4">::</span><span class="me2">KdTreeFLANN</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span> matching<span class="sy4">;</span>
+	matching.<span class="me1">setInputCloud</span><span class="br0">(</span>modelDescriptors<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// A Correspondence object stores the indices of the query and the match,</span>
+	<span class="co1">// and the distance/weight.</span>
+	pcl<span class="sy4">::</span><span class="me2">CorrespondencesPtr</span> correspondences<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">Correspondences</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Check every descriptor computed for the scene.</span>
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">size_t</span> i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> i <span class="sy1">&lt;</span> sceneDescriptors<span class="sy2">-</span><span class="sy1">&gt;</span>size<span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span> <span class="sy2">++</span>i<span class="br0">)</span>
+	<span class="br0">{</span>
+		std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span><span class="kw4">int</span><span class="sy1">&gt;</span> neighbors<span class="br0">(</span>1<span class="br0">)</span><span class="sy4">;</span>
+		std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span><span class="kw4">float</span><span class="sy1">&gt;</span> squaredDistances<span class="br0">(</span>1<span class="br0">)</span><span class="sy4">;</span>
+		<span class="co1">// Ignore NaNs.</span>
+		<span class="kw1">if</span> <span class="br0">(</span>pcl_isfinite<span class="br0">(</span>sceneDescriptors<span class="sy2">-</span><span class="sy1">&gt;</span>at<span class="br0">(</span>i<span class="br0">)</span>.<span class="me1">descriptor</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span><span class="br0">)</span><span class="br0">)</span>
+		<span class="br0">{</span>
+			<span class="co1">// Find the nearest neighbor (in descriptor space)...</span>
+			<span class="kw4">int</span> neighborCount <span class="sy1">=</span> matching.<span class="me1">nearestKSearch</span><span class="br0">(</span>sceneDescriptors<span class="sy2">-</span><span class="sy1">&gt;</span>at<span class="br0">(</span>i<span class="br0">)</span>, 1, neighbors, squaredDistances<span class="br0">)</span><span class="sy4">;</span>
+			<span class="co1">// ...and add a new correspondence if the distance is less than a threshold</span>
+			<span class="co1">// (SHOT distances are between 0 and 1, other descriptors use different metrics).</span>
+			<span class="kw1">if</span> <span class="br0">(</span>neighborCount <span class="sy1">==</span> 1 <span class="sy3">&amp;&amp;</span> squaredDistances<span class="br0">[</span>0<span class="br0">]</span> <span class="sy1">&lt;</span> 0.25f<span class="br0">)</span>
+			<span class="br0">{</span>
+				pcl<span class="sy4">::</span><span class="me2">Correspondence</span> correspondence<span class="br0">(</span>neighbors<span class="br0">[</span>0<span class="br0">]</span>, <span class="kw2">static_cast</span><span class="sy1">&lt;</span><span class="kw4">int</span><span class="sy1">&gt;</span><span class="br0">(</span>i<span class="br0">)</span>, squaredDistances<span class="br0">[</span>0<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+				correspondences<span class="sy2">-</span><span class="sy1">&gt;</span>push_back<span class="br0">(</span>correspondence<span class="br0">)</span><span class="sy4">;</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span>
+	<span class="br0">}</span>
+	std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Found "</span> <span class="sy1">&lt;&lt;</span> correspondences<span class="sy2">-</span><span class="sy1">&gt;</span>size<span class="br0">(</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> <span class="st0">" correspondences."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Tutorial</b>: <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/correspondence_grouping.php">3D Object Recognition based on Correspondence Grouping</a>
+</li>
+<li> <b>API</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_kd_tree_f_l_a_n_n.html">pcl::KdTreeFLANN</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/structpcl_1_1_correspondence.html">pcl::Correspondence</a>
+</li>
+</ul>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_local_pipeline_matching.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Correspondence_grouping">Correspondence grouping</span></h2>
+<p>Right now, all we have is a list of correspondences between keypoints in the scene and keypoints from some object(s) in the database. This does not necessarily mean that a given object is present in the scene. Consider this example: a box with two keypoints located on opposite corners. The distance between the points is known. The matching stage has found two keypoints in the scene with very similar descriptors, but as it turns out, the distance between them is way different. Unless we are taking non-rigid transformations into account (such as scaling), then we have to discard the idea that those points belong to the object.
+</p><p>This check can be implemented with an additional step called <i>correspondence grouping</i>. Like the name states, it groups correspondences that are geometrically consistent (for the given object model) in clusters, and discards the ones that do not. Rotations and translations are permitted, but anything other than that will not meet the criteria. Also, as a minimum of 3 correspondences are required for retrieving the 6 DoF pose, groups with less than that can be ignored.
+</p><p>PCL offers a couple of classes to perform correspondence grouping.
+</p>
+<h3><span class="mw-headline" id="Geometric_consistency">Geometric consistency</span></h3>
+<p>This is the simplest method. It just iterates over all feature correspondences not yet grouped, and adds them to the current subset if they are geometrically consistent. The set resolution can be tuned to make the algorithm more or less forgiving when enforcing the consistency. For every subset (which should correspond with an instance of the model), this PCL class also computes the transformation (rotation and translation), making the next step (<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#Pose_estimation" title="PCL/OpenNI tutorial 5: 3D object recognition (pipeline)">pose estimation</a>) unnecessary.
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/correspondence.h&gt;</span>
+<span class="co2">#include &lt;pcl/recognition/cg/geometric_consistency.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Objects for storing the keypoints of the scene and the model.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneKeypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelKeypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the unclustered and clustered correspondences.</span>
+	pcl<span class="sy4">::</span><span class="me2">CorrespondencesPtr</span> correspondences<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">Correspondences</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Correspondences</span><span class="sy1">&gt;</span> clusteredCorrespondences<span class="sy4">;</span>
+	<span class="co1">// Object for storing the transformations (rotation plus translation).</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span>Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span>, Eigen<span class="sy4">::</span><span class="me2">aligned_allocator</span><span class="sy1">&lt;</span>Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span><span class="sy1">&gt;</span> <span class="sy1">&gt;</span> transformations<span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read the keypoints from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>sceneKeypoints<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>2<span class="br0">]</span>, <span class="sy2">*</span>modelKeypoints<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Note: here you would compute the correspondences.</span>
+	<span class="co1">// It has been omitted here for simplicity.</span>
+&nbsp;
+	<span class="co1">// Object for correspondence grouping.</span>
+	pcl<span class="sy4">::</span><span class="me2">GeometricConsistencyGrouping</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> grouping<span class="sy4">;</span>
+	grouping.<span class="me1">setSceneCloud</span><span class="br0">(</span>sceneKeypoints<span class="br0">)</span><span class="sy4">;</span>
+	grouping.<span class="me1">setInputCloud</span><span class="br0">(</span>modelKeypoints<span class="br0">)</span><span class="sy4">;</span>
+	grouping.<span class="me1">setModelSceneCorrespondences</span><span class="br0">(</span>correspondences<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Minimum cluster size. Default is 3 (as at least 3 correspondences</span>
+	<span class="co1">// are needed to compute the 6 DoF pose).</span>
+	grouping.<span class="me1">setGCThreshold</span><span class="br0">(</span>3<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Resolution of the consensus set used to cluster correspondences together,</span>
+	<span class="co1">// in metric units. Default is 1.0.</span>
+	grouping.<span class="me1">setGCSize</span><span class="br0">(</span>0.01<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	grouping.<span class="me1">recognize</span><span class="br0">(</span>transformations, clusteredCorrespondences<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Model instances found: "</span> <span class="sy1">&lt;&lt;</span> transformations.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">size_t</span> i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> i <span class="sy1">&lt;</span> transformations.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span> i<span class="sy2">++</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Instance "</span> <span class="sy1">&lt;&lt;</span> <span class="br0">(</span>i <span class="sy2">+</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> <span class="st0">":"</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"<span class="es1">\t</span>Has "</span> <span class="sy1">&lt;&lt;</span> clusteredCorrespondences<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> <span class="st0">" correspondences."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+&nbsp;
+		Eigen<span class="sy4">::</span><span class="me2">Matrix3f</span> rotation <span class="sy1">=</span> transformations<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">block</span><span class="sy1">&lt;</span>3, 3<span class="sy1">&gt;</span><span class="br0">(</span>0, 0<span class="br0">)</span><span class="sy4">;</span>
+		Eigen<span class="sy4">::</span><span class="me2">Vector3f</span> translation <span class="sy1">=</span> transformations<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">block</span><span class="sy1">&lt;</span>3, 1<span class="sy1">&gt;</span><span class="br0">(</span>0, 3<span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>    |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>0, 0<span class="br0">)</span>, rotation<span class="br0">(</span>0, 1<span class="br0">)</span>, rotation<span class="br0">(</span>0, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>R = |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>1, 0<span class="br0">)</span>, rotation<span class="br0">(</span>1, 1<span class="br0">)</span>, rotation<span class="br0">(</span>1, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>    |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>2, 0<span class="br0">)</span>, rotation<span class="br0">(</span>2, 1<span class="br0">)</span>, rotation<span class="br0">(</span>2, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>t = &lt;&nbsp;%0.3f,&nbsp;%0.3f,&nbsp;%0.3f &gt;<span class="es1">\n</span>"</span>, translation<span class="br0">(</span>0<span class="br0">)</span>, translation<span class="br0">(</span>1<span class="br0">)</span>, translation<span class="br0">(</span>2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span></pre></div></div>
+<p>If you do not need to compute the transformations (or prefer to do it later in its own step), you can use the <span style="color:#FF1493">"cluster()"</span> function instead of the <span style="color:#FF1493">"recognize()"</span> one, which only takes one parameter (the object for the clustered correspondences).
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points (model), Points (scene), Correspondences, Minimum cluster size, Consensus set resolution
+</li>
+<li> <b>Output</b>: Clustered correspondences, [Transformation]
+</li>
+<li> <b>Tutorial</b>: <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/correspondence_grouping.php">3D Object Recognition based on Correspondence Grouping</a>
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_geometric_consistency_grouping.html">pcl::GeometricConsistencyGrouping</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_local_pipeline_GC_grouping.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h3><span class="mw-headline" id="Hough_voting">Hough voting</span></h3>
+<p>This method is a bit more complex. It uses a technique known as <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Hough_transform">Hough transform</a>, which was originally devised to perform line detection on 2D images, though it was later expanded to work with arbitrary shapes or higher dimensions. The method works with a voting procedure, with votes being cast on candidates that are found to be better suitable. If enough votes are accumulated for a given position in the space, then the shape is considered "found" there and its parameters are retrieved.
+</p><p>The voting procedure is carried out in a parameter space, which would have 6 dimensions in case a full pose needed to be estimated (rotation plus translation). Because that would be computationally expensive, the method implemented in PCL uses only a 3D Hough space, and employs local Reference Frames (RFs) to account for the remaining 3 DoF. Its computation can then be divided in two steps.
+</p><p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:602px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Hough_voting_pipeline.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Hough_voting_pipeline.png" width="600" height="186" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Hough_voting_pipeline.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Use of the Hough voting scheme (red) in a 3D object recognition pipeline (image from <a rel="nofollow" class="external text" href="http://vision.deis.unibo.it/fede/papers/psivt10.pdf">original paper</a>).</div></div></div></div>
+<p><br>
+</p>
+<h4><span class="mw-headline" id="Computing_Reference_Frames">Computing Reference Frames</span></h4>
+<p>For every pair of correspondences, a local Reference Frame must be computed to retrieve the pose later. PCL offers a class that implements the BOrder Aware Repeatable Directions (BOARD) algorithm.
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/board.h&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Objects for storing the point clouds.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneCloud<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelCloud<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the normals.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneNormals<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelNormals<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the keypoints.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneKeypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelKeypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the Reference Frames.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneRF<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelRF<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read the scene and model clouds from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>sceneCloud<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>2<span class="br0">]</span>, <span class="sy2">*</span>modelCloud<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Note: here you would estimate the normals for the whole cloud, and choose</span>
+	<span class="co1">// the keypoints. It has been omitted here for simplicity.</span>
+&nbsp;
+	<span class="co1">// BOARD RF estimation object.</span>
+	pcl<span class="sy4">::</span><span class="me2">BOARDLocalReferenceFrameEstimation</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">Normal</span>, pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span> rf<span class="sy4">;</span>
+	<span class="co1">// Search radius (maximum distance of the points used to estimate the X and Y axes</span>
+	<span class="co1">// of the BOARD Reference Frame for a given point).</span>
+	rf.<span class="me1">setRadiusSearch</span><span class="br0">(</span>0.02f<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Check if support is complete, or has missing regions because it is too close to mesh borders.</span>
+	rf.<span class="me1">setFindHoles</span><span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	rf.<span class="me1">setInputCloud</span><span class="br0">(</span>sceneKeypoints<span class="br0">)</span><span class="sy4">;</span>
+	rf.<span class="me1">setInputNormals</span><span class="br0">(</span>sceneNormals<span class="br0">)</span><span class="sy4">;</span>
+	rf.<span class="me1">setSearchSurface</span><span class="br0">(</span>sceneCloud<span class="br0">)</span><span class="sy4">;</span>
+	rf.<span class="me1">compute</span><span class="br0">(</span><span class="sy2">*</span>sceneRF<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	rf.<span class="me1">setInputCloud</span><span class="br0">(</span>modelKeypoints<span class="br0">)</span><span class="sy4">;</span>
+	rf.<span class="me1">setInputNormals</span><span class="br0">(</span>modelNormals<span class="br0">)</span><span class="sy4">;</span>
+	rf.<span class="me1">setSearchSurface</span><span class="br0">(</span>modelCloud<span class="br0">)</span><span class="sy4">;</span>
+	rf.<span class="me1">compute</span><span class="br0">(</span><span class="sy2">*</span>modelRF<span class="br0">)</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<p>Be sure to check the API reference because the BOARD estimation object has many more parameters to tune.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points, Normals, Search radius, [Tangent radius], [Margin array size], [Margin threshold], [Find holes], [Hole size threshold], [Steepness threshold]
+</li>
+<li> <b>Output</b>: Reference Frames
+</li>
+<li> <b>Tutorial</b>: <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/correspondence_grouping.php">3D Object Recognition based on Correspondence Grouping</a>
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://vision.deis.unibo.it/LRF/LRF_repeatability_ICCV2011.pdf">On the repeatability of the local reference frame for partial shape matching</a> (Alioscia Petrelli and Luigi Di Stefano, 2011)
+</li>
+</ul>
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_b_o_a_r_d_local_reference_frame_estimation.html">pcl::BOARDLocalReferenceFrameEstimation</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_local_pipeline_Hough_RFs.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h4><span class="mw-headline" id="Clustering">Clustering</span></h4>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/recognition/cg/hough_3d.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Objects for storing the keypoints of the scene and the model.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneKeypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelKeypoints<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the Reference Frames.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneRF<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelRF<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the unclustered and clustered correspondences.</span>
+	pcl<span class="sy4">::</span><span class="me2">CorrespondencesPtr</span> correspondences<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">Correspondences</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Correspondences</span><span class="sy1">&gt;</span> clusteredCorrespondences<span class="sy4">;</span>
+	<span class="co1">// Object for storing the transformations (rotation plus translation).</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span>Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span>, Eigen<span class="sy4">::</span><span class="me2">aligned_allocator</span><span class="sy1">&lt;</span>Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span><span class="sy1">&gt;</span> <span class="sy1">&gt;</span> transformations<span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read the keypoints from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>sceneKeypoints<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>2<span class="br0">]</span>, <span class="sy2">*</span>modelKeypoints<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Note: here you would compute the correspondences and the Reference Frames.</span>
+	<span class="co1">// It has been omitted here for simplicity.</span>
+&nbsp;
+	<span class="co1">// Object for correspondence grouping.</span>
+	pcl<span class="sy4">::</span><span class="me2">Hough3DGrouping</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span>, pcl<span class="sy4">::</span><span class="me2">ReferenceFrame</span><span class="sy1">&gt;</span> grouping<span class="sy4">;</span>
+	grouping.<span class="me1">setInputCloud</span><span class="br0">(</span>modelKeypoints<span class="br0">)</span><span class="sy4">;</span>
+	grouping.<span class="me1">setInputRf</span><span class="br0">(</span>modelRF<span class="br0">)</span><span class="sy4">;</span>
+	grouping.<span class="me1">setSceneCloud</span><span class="br0">(</span>sceneKeypoints<span class="br0">)</span><span class="sy4">;</span>
+	grouping.<span class="me1">setSceneRf</span><span class="br0">(</span>sceneRF<span class="br0">)</span><span class="sy4">;</span>
+	grouping.<span class="me1">setModelSceneCorrespondences</span><span class="br0">(</span>correspondences<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Minimum cluster size. Default is 3 (as at least 3 correspondences</span>
+	<span class="co1">// are needed to compute the 6 DoF pose).</span>
+	grouping.<span class="me1">setHoughThreshold</span><span class="br0">(</span>3<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Size of each bin in the Hough space.</span>
+	grouping.<span class="me1">setHoughBinSize</span><span class="br0">(</span>3<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// If true, the vote casting procedure will interpolate the score</span>
+	<span class="co1">// between neighboring bins in the Hough space.</span>
+	grouping.<span class="me1">setUseInterpolation</span><span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// If true, the vote casting procedure will use the correspondence's</span>
+	<span class="co1">// weighted distance to compute the Hough voting score.</span>
+	grouping.<span class="me1">setUseDistanceWeight</span><span class="br0">(</span><span class="kw2">false</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	grouping.<span class="me1">recognize</span><span class="br0">(</span>transformations, clusteredCorrespondences<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Model instances found: "</span> <span class="sy1">&lt;&lt;</span> transformations.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">size_t</span> i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> i <span class="sy1">&lt;</span> transformations.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span> i<span class="sy2">++</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Instance "</span> <span class="sy1">&lt;&lt;</span> <span class="br0">(</span>i <span class="sy2">+</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> <span class="st0">":"</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"<span class="es1">\t</span>Has "</span> <span class="sy1">&lt;&lt;</span> clusteredCorrespondences<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">&lt;&lt;</span> <span class="st0">" correspondences."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+&nbsp;
+		Eigen<span class="sy4">::</span><span class="me2">Matrix3f</span> rotation <span class="sy1">=</span> transformations<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">block</span><span class="sy1">&lt;</span>3, 3<span class="sy1">&gt;</span><span class="br0">(</span>0, 0<span class="br0">)</span><span class="sy4">;</span>
+		Eigen<span class="sy4">::</span><span class="me2">Vector3f</span> translation <span class="sy1">=</span> transformations<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">block</span><span class="sy1">&lt;</span>3, 1<span class="sy1">&gt;</span><span class="br0">(</span>0, 3<span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>    |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>0, 0<span class="br0">)</span>, rotation<span class="br0">(</span>0, 1<span class="br0">)</span>, rotation<span class="br0">(</span>0, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>R = |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>1, 0<span class="br0">)</span>, rotation<span class="br0">(</span>1, 1<span class="br0">)</span>, rotation<span class="br0">(</span>1, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>    |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>2, 0<span class="br0">)</span>, rotation<span class="br0">(</span>2, 1<span class="br0">)</span>, rotation<span class="br0">(</span>2, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>t = &lt;&nbsp;%0.3f,&nbsp;%0.3f,&nbsp;%0.3f &gt;<span class="es1">\n</span>"</span>, translation<span class="br0">(</span>0<span class="br0">)</span>, translation<span class="br0">(</span>1<span class="br0">)</span>, translation<span class="br0">(</span>2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span></pre></div></div>
+<p>If you do not give the Reference Frames to the Hough grouping object, it will calculate them itself, but then you need to specify additional parameters. See the API for more details. Also, you can <span style="color:#FF1493">"cluster()"</span> instead of <span style="color:#FF1493">"recognize()"</span> if you want to skip the pose estimation now.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points (model), Points (scene), Correspondences, Reference Frames (model), Reference Frames (scene), Hough bin size, Hough threshold, [Use distance weight], [Use interpolation]
+</li>
+<li> <b>Output</b>: Clustered correspondences, [Transformation]
+</li>
+<li> <b>Tutorial</b>: <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/correspondence_grouping.php">3D Object Recognition based on Correspondence Grouping</a>
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://vision.deis.unibo.it/fede/papers/psivt10.pdf">Object recognition in 3D scenes with occlusions and clutter by Hough voting</a> (Federico Tombari and Luigi Di Stefano, 2010)
+</li>
+</ul>
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_hough3_d_grouping.html">pcl::Hough3DGrouping</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_local_pipeline_Hough_grouping.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Pose_estimation">Pose estimation</span></h2>
+<p>The two correspondence grouping classes included in PCL already compute the full pose, but you can do it manually if you want, or if you want to refine the results of the previous step (removing correspondences that are not compatible with the same 6 DoF pose). You can use a method like RANSAC (RANdom SAmple Consensus), to get the rotation and translation of the rigid transformation that best fits the correspondences of a model instance. In a previous tutorial we mentioned that there was a technique called <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)#Registration" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">feature-based registration</a> which was an alternative to ICP, and this is it.
+</p><p>Of course, PCL has some classes for this. The one we are going to see adds a prerejection step to the RANSAC loop, in order to discard hypotheses that are probably wrong. To do this, the algorithm forms polygons with the points of the input sets, and then checks pose-invariant geometrical constraints. To be precise, it makes sure that the polygon edges are of similar length. You can let it run for a specified number of iterations (as, like you already know, RANSAC never actually converges), or set a threshold.
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/shot.h&gt;</span>
+<span class="co2">#include &lt;pcl/registration/sample_consensus_prerejective.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Objects for storing the scene and the model.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> scene<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> model<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> alignedModel<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the SHOT descriptors for the scene and model.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> sceneDescriptors<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> modelDescriptors<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read the clouds from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>scene<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>2<span class="br0">]</span>, <span class="sy2">*</span>model<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Note: here you would compute or load the descriptors for both</span>
+	<span class="co1">// the scene and the model. It has been omitted here for simplicity.</span>
+&nbsp;
+	<span class="co1">// Object for pose estimation.</span>
+	pcl<span class="sy4">::</span><span class="me2">SampleConsensusPrerejective</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">SHOT352</span><span class="sy1">&gt;</span> pose<span class="sy4">;</span>
+	pose.<span class="me1">setInputSource</span><span class="br0">(</span>model<span class="br0">)</span><span class="sy4">;</span>
+	pose.<span class="me1">setInputTarget</span><span class="br0">(</span>scene<span class="br0">)</span><span class="sy4">;</span>
+	pose.<span class="me1">setSourceFeatures</span><span class="br0">(</span>modelDescriptors<span class="br0">)</span><span class="sy4">;</span>
+	pose.<span class="me1">setTargetFeatures</span><span class="br0">(</span>sceneDescriptors<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Instead of matching a descriptor with its nearest neighbor, choose randomly between</span>
+	<span class="co1">// the N closest ones, making it more robust to outliers, but increasing time.</span>
+	pose.<span class="me1">setCorrespondenceRandomness</span><span class="br0">(</span>2<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the fraction (0-1) of inlier points required for accepting a transformation.</span>
+	<span class="co1">// At least this number of points will need to be aligned to accept a pose.</span>
+	pose.<span class="me1">setInlierFraction</span><span class="br0">(</span>0.25f<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the number of samples to use during each iteration (minimum for 6 DoF is 3).</span>
+	pose.<span class="me1">setNumberOfSamples</span><span class="br0">(</span>3<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the similarity threshold (0-1) between edge lengths of the polygons. The</span>
+	<span class="co1">// closer to 1, the more strict the rejector will be, probably discarding acceptable poses.</span>
+	pose.<span class="me1">setSimilarityThreshold</span><span class="br0">(</span>0.6f<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Set the maximum distance threshold between two correspondent points in source and target.</span>
+	<span class="co1">// If the distance is larger, the points will be ignored in the alignment process.</span>
+	pose.<span class="me1">setMaxCorrespondenceDistance</span><span class="br0">(</span>0.01f<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	pose.<span class="me1">align</span><span class="br0">(</span><span class="sy2">*</span>alignedModel<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>pose.<span class="me1">hasConverged</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		Eigen<span class="sy4">::</span><span class="me2">Matrix4f</span> transformation <span class="sy1">=</span> pose.<span class="me1">getFinalTransformation</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span>
+		Eigen<span class="sy4">::</span><span class="me2">Matrix3f</span> rotation <span class="sy1">=</span> transformation.<span class="me1">block</span><span class="sy1">&lt;</span>3, 3<span class="sy1">&gt;</span><span class="br0">(</span>0, 0<span class="br0">)</span><span class="sy4">;</span>
+		Eigen<span class="sy4">::</span><span class="me2">Vector3f</span> translation <span class="sy1">=</span> transformation.<span class="me1">block</span><span class="sy1">&lt;</span>3, 1<span class="sy1">&gt;</span><span class="br0">(</span>0, 3<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Transformation matrix:"</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>    |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>0, 0<span class="br0">)</span>, rotation<span class="br0">(</span>0, 1<span class="br0">)</span>, rotation<span class="br0">(</span>0, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>R = |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>1, 0<span class="br0">)</span>, rotation<span class="br0">(</span>1, 1<span class="br0">)</span>, rotation<span class="br0">(</span>1, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>    |&nbsp;%6.3f&nbsp;%6.3f&nbsp;%6.3f | <span class="es1">\n</span>"</span>, rotation<span class="br0">(</span>2, 0<span class="br0">)</span>, rotation<span class="br0">(</span>2, 1<span class="br0">)</span>, rotation<span class="br0">(</span>2, 2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		<span class="kw3">printf</span><span class="br0">(</span><span class="st0">"<span class="es1">\t</span><span class="es1">\t</span>t = &lt;&nbsp;%0.3f,&nbsp;%0.3f,&nbsp;%0.3f &gt;<span class="es1">\n</span>"</span>, translation<span class="br0">(</span>0<span class="br0">)</span>, translation<span class="br0">(</span>1<span class="br0">)</span>, translation<span class="br0">(</span>2<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">else</span> std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Did not converge."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<p>For an alternative, check the <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_sample_consensus_model_registration.html">pcl::SampleConsensusModelRegistration</a>  or the <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_sample_consensus_initial_alignment.html">pcl::SampleConsensusInitialAlignment</a> classes.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points (model), Points (scene), Descriptors (model), Descriptors (scene), [Correspondence randomness], [Inlier fraction], [Number of samples], [Similarity threshold]
+</li>
+<li> <b>Output</b>: Aligned model, [Transformation]
+</li>
+<li> <b>Tutorials</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/alignment_prerejective.php">Robust pose estimation of rigid objects</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/template_alignment.php">Aligning object templates to a point cloud</a>
+</li>
+</ul>
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://personal.lut.fi/users/joni.kamarainen/downloads/publications/icra2013.pdf">Pose Estimation using Local Structure-Specific Shape and Appearance Context</a> (Anders Glent Buch et al., 2013)
+</li>
+</ul>
+</li>
+<li> <b>API</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_sample_consensus_prerejective.html">pcl::SampleConsensusPrerejective</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1registration_1_1_correspondence_rejector_poly.html">pcl::registration::CorrespondenceRejectorPoly</a>
+</li>
+</ul>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_local_pipeline_pose.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h1><span class="mw-headline" id="Global_pipeline">Global pipeline</span></h1>
+<p>Because of the way global descriptors work, the global pipeline for object recognition differs in some steps.
+</p>
+<h2><span class="mw-headline" id="Segmentation">Segmentation</span></h2>
+<p>Unlike local descriptors, global ones understand the notion of <i>object</i>. They are not computed for single points, but for whole clusters. Because of this, the first step is to perform <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)#Segmentation" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">segmentation</a> on the cloud in order to retrieve all objects. You can use any method you like from the ones available in PCL, as long as it works for you. Also, performing some kind of preprocessing is a good idea, like removing all clusters that are smaller or bigger than certain thresholds, which should be set according to the objects in the database. Yet another possibility is to perform <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)#Plane_model" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">plane segmentation</a> to find any table(s) in the scene, and consider only clusters sitting on it (if we can assume there is a table, of course).
+</p><p>PCL provides the <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_extract_polygonal_prism_data.html">pcl::ExtractPolygonalPrismData</a> class for the latter task. By giving a <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)#Convex_hull" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">convex hull</a> computed from the plane coefficients, it will extrude it a certain height to create a prism, and then give back all points that lie inside. This is the code:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/sample_consensus/method_types.h&gt;</span>
+<span class="co2">#include &lt;pcl/sample_consensus/model_types.h&gt;</span>
+<span class="co2">#include &lt;pcl/segmentation/sac_segmentation.h&gt;</span>
+<span class="co2">#include &lt;pcl/filters/extract_indices.h&gt;</span>
+<span class="co2">#include &lt;pcl/surface/convex_hull.h&gt;</span>
+<span class="co2">#include &lt;pcl/segmentation/extract_polygonal_prism_data.h&gt;</span>
+<span class="co2">#include &lt;pcl/visualization/cloud_viewer.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Objects for storing the point clouds.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> cloud<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> plane<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> convexHull<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> objects<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read a PCD file from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>cloud<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Get the plane model, if present.</span>
+	pcl<span class="sy4">::</span><span class="me2">ModelCoefficients</span><span class="sy4">::</span><span class="me2">Ptr</span> coefficients<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">ModelCoefficients</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">SACSegmentation</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> segmentation<span class="sy4">;</span>
+	segmentation.<span class="me1">setInputCloud</span><span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+	segmentation.<span class="me1">setModelType</span><span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">SACMODEL_PLANE</span><span class="br0">)</span><span class="sy4">;</span>
+	segmentation.<span class="me1">setMethodType</span><span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">SAC_RANSAC</span><span class="br0">)</span><span class="sy4">;</span>
+	segmentation.<span class="me1">setDistanceThreshold</span><span class="br0">(</span>0.01<span class="br0">)</span><span class="sy4">;</span>
+	segmentation.<span class="me1">setOptimizeCoefficients</span><span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointIndices</span><span class="sy4">::</span><span class="me2">Ptr</span> planeIndices<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointIndices</span><span class="br0">)</span><span class="sy4">;</span>
+	segmentation.<span class="me1">segment</span><span class="br0">(</span><span class="sy2">*</span>planeIndices, <span class="sy2">*</span>coefficients<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>planeIndices<span class="sy2">-</span><span class="sy1">&gt;</span>indices.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">==</span> 0<span class="br0">)</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"Could not find a plane in the scene."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+	<span class="kw1">else</span>
+	<span class="br0">{</span>
+		<span class="co1">// Copy the points of the plane to a new cloud.</span>
+		pcl<span class="sy4">::</span><span class="me2">ExtractIndices</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> extract<span class="sy4">;</span>
+		extract.<span class="me1">setInputCloud</span><span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+		extract.<span class="me1">setIndices</span><span class="br0">(</span>planeIndices<span class="br0">)</span><span class="sy4">;</span>
+		extract.<span class="me1">filter</span><span class="br0">(</span><span class="sy2">*</span>plane<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+		<span class="co1">// Retrieve the convex hull.</span>
+		pcl<span class="sy4">::</span><span class="me2">ConvexHull</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> hull<span class="sy4">;</span>
+		hull.<span class="me1">setInputCloud</span><span class="br0">(</span>plane<span class="br0">)</span><span class="sy4">;</span>
+		<span class="co1">// Make sure that the resulting hull is bidimensional.</span>
+		hull.<span class="me1">setDimension</span><span class="br0">(</span>2<span class="br0">)</span><span class="sy4">;</span>
+		hull.<span class="me1">reconstruct</span><span class="br0">(</span><span class="sy2">*</span>convexHull<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+		<span class="co1">// Redundant check.</span>
+		<span class="kw1">if</span> <span class="br0">(</span>hull.<span class="me1">getDimension</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">==</span> <span class="nu0">2</span><span class="br0">)</span>
+		<span class="br0">{</span>
+			<span class="co1">// Prism object.</span>
+			pcl<span class="sy4">::</span><span class="me2">ExtractPolygonalPrismData</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span> prism<span class="sy4">;</span>
+			prism.<span class="me1">setInputCloud</span><span class="br0">(</span>cloud<span class="br0">)</span><span class="sy4">;</span>
+			prism.<span class="me1">setInputPlanarHull</span><span class="br0">(</span>convexHull<span class="br0">)</span><span class="sy4">;</span>
+			<span class="co1">// First parameter: minimum Z value. Set to 0, segments objects lying on the plane (can be negative).</span>
+			<span class="co1">// Second parameter: maximum Z value, set to 10cm. Tune it according to the height of the objects you expect.</span>
+			prism.<span class="me1">setHeightLimits</span><span class="br0">(</span>0.0f, 0.1f<span class="br0">)</span><span class="sy4">;</span>
+			pcl<span class="sy4">::</span><span class="me2">PointIndices</span><span class="sy4">::</span><span class="me2">Ptr</span> objectIndices<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointIndices</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+			prism.<span class="me1">segment</span><span class="br0">(</span><span class="sy2">*</span>objectIndices<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+			<span class="co1">// Get and show all points retrieved by the hull.</span>
+			extract.<span class="me1">setIndices</span><span class="br0">(</span>objectIndices<span class="br0">)</span><span class="sy4">;</span>
+			extract.<span class="me1">filter</span><span class="br0">(</span><span class="sy2">*</span>objects<span class="br0">)</span><span class="sy4">;</span>
+			pcl<span class="sy4">::</span><span class="me2">visualization</span><span class="sy4">::</span><span class="me2">CloudViewer</span> viewerObjects<span class="br0">(</span><span class="st0">"Objects on table"</span><span class="br0">)</span><span class="sy4">;</span>
+			viewerObjects.<span class="me1">showCloud</span><span class="br0">(</span>objects<span class="br0">)</span><span class="sy4">;</span>
+			<span class="kw1">while</span> <span class="br0">(</span><span class="sy3">!</span>viewerObjects.<span class="me1">wasStopped</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+			<span class="br0">{</span>
+				<span class="co1">// Do nothing but wait.</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span>
+		<span class="kw1">else</span> std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"The chosen hull is not planar."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span></pre></div></div>
+<p><br>
+</p>
+<center><ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Prism_scene_before.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Prism_scene_before.png" width="224" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Original scene, with a mug on a table.
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Prism_scene_after.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/Prism_scene_after.png" width="224" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Result after using the polygonal prism class.
+</p>
+			</div>
+		</div></li>
+</ul></center>
+<p><br>
+If you get some residual points of the table in the output, try increasing the minimum Z value a bit.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points, Convex hull, Height limits, [Dimensionality]
+</li>
+<li> <b>Output</b>: Point indices
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_extract_polygonal_prism_data.html">pcl::ExtractPolygonalPrismData</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_polygonal_prism.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Computing_descriptors_2">Computing descriptors</span></h2>
+<p>For every cluster that has survived the previous step, a global descriptor must be computed. Most only output one histogram (except for CVFH and derivatives), so the database will be smaller than with local descriptors. Check the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)#Table" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">list</a> and choose the one that fits you best.
+</p>
+<h3><span class="mw-headline" id="CRH">CRH</span></h3>
+<p>In a previous article about global descriptors we talked about how they were invariant to the camera roll angle. When <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)#CVFH" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">CVFH</a> was presented, the computation of a Camera Roll Histogram (CRH) was proposed to overcome this. The CRH should be computed and stored next to the global descriptor (VFH, CVFH...) for its use in a later phase, the pose estimation.
+</p><p>The CRH is computed as follows: for every point, its normal is projected onto a plane orthogonal to the vector given by the camera center and the centroid of the cluster (VFH) or region (CVFH). Then, the angle of the projected normal to the up vector of the camera is computed and added to the histogram, which has 90 bins (for a resolution of 4º). The projected normals are weighted by their magnitudes to reduce the effect of input noise. Check the <a rel="nofollow" class="external text" href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6130296">paper</a> for details.
+</p><p>You can compute it using PCL, of course:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/normal_3d.h&gt;</span>
+<span class="co2">#include &lt;pcl/common/centroid.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/crh.h&gt;</span>
+&nbsp;
+<span class="co1">// A handy typedef.</span>
+<span class="kw4">typedef</span> pcl<span class="sy4">::</span><span class="me2">Histogram</span><span class="sy1">&lt;</span>90<span class="sy1">&gt;</span> CRH90<span class="sy4">;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Cloud for storing the object.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> object<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Object for storing the normals.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> normals<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Object for storing the CRH.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>CRH90<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> histogram<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>CRH90<span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Note: this cloud file should contain a snapshot of the object. Remember</span>
+	<span class="co1">// that you need to compute a CRH for every VFH or CVFH descriptor that you</span>
+	<span class="co1">// are going to have (that is, one for every snapshot).</span>
+&nbsp;
+	<span class="co1">// Read a PCD file from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>object<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Estimate the normals.</span>
+	pcl<span class="sy4">::</span><span class="me2">NormalEstimation</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">Normal</span><span class="sy1">&gt;</span> normalEstimation<span class="sy4">;</span>
+	normalEstimation.<span class="me1">setInputCloud</span><span class="br0">(</span>object<span class="br0">)</span><span class="sy4">;</span>
+	normalEstimation.<span class="me1">setRadiusSearch</span><span class="br0">(</span>0.03<span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">search</span><span class="sy4">::</span><span class="me2">KdTree</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> kdtree<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">search</span><span class="sy4">::</span><span class="me2">KdTree</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	normalEstimation.<span class="me1">setSearchMethod</span><span class="br0">(</span>kdtree<span class="br0">)</span><span class="sy4">;</span>
+	normalEstimation.<span class="me1">compute</span><span class="br0">(</span><span class="sy2">*</span>normals<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// CRH estimation object.</span>
+	pcl<span class="sy4">::</span><span class="me2">CRHEstimation</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, pcl<span class="sy4">::</span><span class="me2">Normal</span>, CRH90<span class="sy1">&gt;</span> crh<span class="sy4">;</span>
+	crh.<span class="me1">setInputCloud</span><span class="br0">(</span>object<span class="br0">)</span><span class="sy4">;</span>
+	crh.<span class="me1">setInputNormals</span><span class="br0">(</span>normals<span class="br0">)</span><span class="sy4">;</span>
+	Eigen<span class="sy4">::</span><span class="me2">Vector4f</span> centroid<span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">compute3DCentroid</span><span class="br0">(</span><span class="sy2">*</span>object, centroid<span class="br0">)</span><span class="sy4">;</span>
+	crh.<span class="me1">setCentroid</span><span class="br0">(</span>centroid<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Compute the CRH.</span>
+	crh.<span class="me1">compute</span><span class="br0">(</span><span class="sy2">*</span>histogram<span class="br0">)</span><span class="sy4">;</span>
+<span class="br0">}</span></pre></div></div>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points (cluster), Normals, Centroid
+</li>
+<li> <b>Output</b>: Camera roll histogram
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6130296">CAD-Model Recognition and 6DOF Pose Estimation Using 3D Cues</a> (requires IEEE Xplore subscription) (Aitor Aldoma et al., 2011)
+</li>
+</ul>
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_c_r_h_estimation.html">pcl::CRHEstimation</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_CRH.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Matching_2">Matching</span></h2>
+<p>Like with the local pipeline, once all the descriptors have been computed we have to perform a search for their nearest neighbors in the database. The <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan or L1 distance</a> is recommended over the <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Euclidean_distance">Euclidean or L2</a> one because it is more robust to occlusions.
+</p><p>Usually, more than one neighbor is retrieved, which means that the found object's pose is somewhere between the two. The next steps can help improving the accuraccy of the estimation.
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Tutorial</b>: <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/vfh_recognition.php">Cluster Recognition and 6DOF Pose Estimation using VFH descriptors</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Pose_estimation_2">Pose estimation</span></h2>
+<p>The object's position can be determined by computing and aligning the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)#Computing_the_centroid" title="PCL/OpenNI tutorial 2: Cloud processing (basic)">centroids</a> of the clusters (the one in the scene, and the one in the snapshot). For the rotation, we must use the viewpoint information encoded in the descriptor (you can check the ground truth pose information that was saved with the matched snapshot). This still leaves the roll angle unresolved, as global descriptors are invariant to it. Now is when the Camera Roll Histogram (<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#CRH" title="PCL/OpenNI tutorial 5: 3D object recognition (pipeline)">CRH</a>) that we should have stored next to the descriptor comes in handy. The angle can be obtained by aligning the current CRH with the stored one, completing the 6 DoF pose estimation.
+</p>
+<h3><span class="mw-headline" id="CRH_2">CRH</span></h3>
+<p>This is the code for retrieving the roll angle using CRH:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="cpp source-cpp" style="font-family:monospace;"><pre class="de1"><span class="co2">#include &lt;pcl/io/pcd_io.h&gt;</span>
+<span class="co2">#include &lt;pcl/common/centroid.h&gt;</span>
+<span class="co2">#include &lt;pcl/features/crh.h&gt;</span>
+<span class="co2">#include &lt;pcl/recognition/crh_alignment.h&gt;</span>
+&nbsp;
+<span class="co2">#include &lt;iostream&gt;</span>
+<span class="co2">#include &lt;vector&gt;</span>
+&nbsp;
+<span class="co1">// A handy typedef.</span>
+<span class="kw4">typedef</span> pcl<span class="sy4">::</span><span class="me2">Histogram</span><span class="sy1">&lt;</span>90<span class="sy1">&gt;</span> CRH90<span class="sy4">;</span>
+&nbsp;
+<span class="kw4">int</span>
+main<span class="br0">(</span><span class="kw4">int</span> argc, <span class="kw4">char</span><span class="sy2">**</span> argv<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Clouds for storing the object's cluster and view.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> viewCloud<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> clusterCloud<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the CRHs of both.</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>CRH90<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> viewCRH<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>CRH90<span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>CRH90<span class="sy1">&gt;</span><span class="sy4">::</span><span class="me2">Ptr</span> clusterCRH<span class="br0">(</span><span class="kw3">new</span> pcl<span class="sy4">::</span><span class="me2">PointCloud</span><span class="sy1">&lt;</span>CRH90<span class="sy1">&gt;</span><span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// Objects for storing the centroids.</span>
+	Eigen<span class="sy4">::</span><span class="me2">Vector4f</span> viewCentroid<span class="sy4">;</span>
+	Eigen<span class="sy4">::</span><span class="me2">Vector4f</span> clusterCentroid<span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Read the trained view and the scene cluster from disk.</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>1<span class="br0">]</span>, <span class="sy2">*</span>viewCloud<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>pcl<span class="sy4">::</span><span class="me2">io</span><span class="sy4">::</span><span class="me2">loadPCDFile</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span><span class="sy1">&gt;</span><span class="br0">(</span>argv<span class="br0">[</span>2<span class="br0">]</span>, <span class="sy2">*</span>clusterCloud<span class="br0">)</span> <span class="sy3">!</span><span class="sy1">=</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">return</span> <span class="sy2">-</span><span class="nu0">1</span><span class="sy4">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Note: here you would compute the CRHs and centroids of both clusters.</span>
+	<span class="co1">// It has been omitted here for simplicity.</span>
+&nbsp;
+	<span class="co1">// CRH alignment object.</span>
+	pcl<span class="sy4">::</span><span class="me2">CRHAlignment</span><span class="sy1">&lt;</span>pcl<span class="sy4">::</span><span class="me2">PointXYZ</span>, 90<span class="sy1">&gt;</span> alignment<span class="sy4">;</span>
+	alignment.<span class="me1">setInputAndTargetView</span><span class="br0">(</span>clusterCloud, viewCloud<span class="br0">)</span><span class="sy4">;</span>
+	<span class="co1">// CRHAlignment works with Vector3f, not Vector4f.</span>
+	Eigen<span class="sy4">::</span><span class="me2">Vector3f</span> viewCentroid3f<span class="br0">(</span>viewCentroid<span class="br0">[</span>0<span class="br0">]</span>, viewCentroid<span class="br0">[</span>1<span class="br0">]</span>, viewCentroid<span class="br0">[</span>2<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+	Eigen<span class="sy4">::</span><span class="me2">Vector3f</span> clusterCentroid3f<span class="br0">(</span>clusterCentroid<span class="br0">[</span>0<span class="br0">]</span>, clusterCentroid<span class="br0">[</span>1<span class="br0">]</span>, clusterCentroid<span class="br0">[</span>2<span class="br0">]</span><span class="br0">)</span><span class="sy4">;</span>
+	alignment.<span class="me1">setInputAndTargetCentroids</span><span class="br0">(</span>clusterCentroid3f, viewCentroid3f<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="co1">// Compute the roll angle(s).</span>
+	std<span class="sy4">::</span><span class="me2">vector</span><span class="sy1">&lt;</span><span class="kw4">float</span><span class="sy1">&gt;</span> angles<span class="sy4">;</span>
+	alignment.<span class="me1">computeRollAngle</span><span class="br0">(</span><span class="sy2">*</span>clusterCRH, <span class="sy2">*</span>viewCRH, angles<span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>angles.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span> <span class="sy1">&gt;</span> 0<span class="br0">)</span>
+	<span class="br0">{</span>
+		std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"List of angles where the histograms correlate:"</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+&nbsp;
+		<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> i <span class="sy1">&lt;</span> angles.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="sy4">;</span> i<span class="sy2">++</span><span class="br0">)</span>
+		<span class="br0">{</span>
+			std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">"<span class="es1">\t</span>"</span> <span class="sy1">&lt;&lt;</span> angles.<span class="me1">at</span><span class="br0">(</span>i<span class="br0">)</span> <span class="sy1">&lt;&lt;</span> <span class="st0">" degrees."</span> <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+		<span class="br0">}</span>
+	<span class="br0">}</span>
+<span class="br0">}</span></pre></div></div>
+<p>This will return a list of most probable roll angles. If you want, you can instead use the <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_c_r_h_alignment.html#a32c40356d56e22d48eccce5e27e436f2">align()</a> function, which calls <span style="color:#FF1493">"computeRollAngle()"</span> internally. It will return a list of transformations that include the translation (computed from the difference between the centroid's coordinates) and the roll angles, but not the yaw or pitch (you have to get those with pose estimation).
+</p>
+<div style="background-color: #F8F8F8; border-style: dotted;">
+<ul>
+<li> <b>Input</b>: Points (input and target), Centroids (input and target), CRHs (input and target)
+</li>
+<li> <b>Output</b>: Roll angles, [Transformations]
+</li>
+<li> <b>Publication</b>:
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6130296">CAD-Model Recognition and 6DOF Pose Estimation Using 3D Cues</a> (requires IEEE Xplore subscription) (Aitor Aldoma et al., 2011)
+</li>
+</ul>
+</li>
+<li> <b>API</b>: <a rel="nofollow" class="external text" href="http://docs.pointclouds.org/trunk/classpcl_1_1_c_r_h_alignment.html">pcl::CRHAlignment</a>
+</li>
+<li> <a rel="nofollow" class="external text" href="http://robotica.unileon.es/~victorm/PCL_roll_estimation.tar.gz">Download</a>
+</li>
+</ul>
+</div>
+<p><br>
+</p>
+<h1><span class="mw-headline" id="Postprocessing">Postprocessing</span></h1>
+<p>The pipelines, as they are, should already return a decent result, but we can implement optional steps to improve the accuraccy of the pose estimation, and decrease the probability of a false positive.
+</p>
+<h2><span class="mw-headline" id="Pose_refinement">Pose refinement</span></h2>
+<p>The 6 DoF pose estimation can be refined with the use of the <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)#Iterative_Closest_Point_.28ICP.29" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">Iterative Closest Point</a> (ICP) algorithm. It will try to continuously realign the clouds to improve the transformation, until the termination condition is met (maximum iterations, and distance or error threshold). This is identical to performing <a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)#Registration" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">registration</a>, only between input and model.
+</p>
+<h2><span class="mw-headline" id="Hypothesis_verification">Hypothesis verification</span></h2>
+<p><i>(Work in progress)</i>
+</p><p><br>
+</p>
+<hr>
+<hr>
+<p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p><p>Links to articles:
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics" title="PCL/OpenNI tutorial 0: The very basics">PCL/OpenNI tutorial 0: The very basics</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing" title="PCL/OpenNI tutorial 1: Installing and testing">PCL/OpenNI tutorial 1: Installing and testing</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)" title="PCL/OpenNI tutorial 2: Cloud processing (basic)">PCL/OpenNI tutorial 2: Cloud processing (basic)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">PCL/OpenNI tutorial 3: Cloud processing (advanced)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">PCL/OpenNI tutorial 4: 3D object recognition (descriptors)</a>
+</p><p><strong class="selflink">PCL/OpenNI tutorial 5: 3D object recognition (pipeline)</strong>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting" title="PCL/OpenNI troubleshooting">PCL/OpenNI troubleshooting</a>
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.466 seconds
+Real time usage: 0.474 seconds
+Preprocessor visited node count: 293/1000000
+Preprocessor generated node count: 518/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:429-0!*!0!!en!2!* and timestamp 20150622213353
+ -->
+</div>								<div class="printfooter">
+				Retrieved from "<a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&oldid=4683">http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&amp;oldid=4683</a>"				</div>
+												<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+				<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+	<h3 id="p-personal-label">Personal tools</h3>
+	<ul>
+<li id="pt-login"><a href="http://robotica.unileon.es/mediawiki/index.php?title=Special:UserLogin&returnto=PCL%2FOpenNI+tutorial+5%3A+3D+object+recognition+%28pipeline%29" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>	</ul>
+</div>
+				<div id="left-navigation">
+					<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+	<h3 id="p-namespaces-label">Namespaces</h3>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE.html" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk" class="new"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=Talk:PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&action=edit&redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+	<h3 id="mw-vector-current-variant">
+		</h3>
+	<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+				</div>
+				<div id="right-navigation">
+					<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+	<h3 id="p-views-label">Views</h3>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE.html">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+	<h3 id="p-cactions-label" tabindex="0"><span>Actions</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+<div id="p-search" role="search">
+	<h3><label for="searchInput">Search</label></h3>
+	<form action="http://robotica.unileon.es/mediawiki/index.php" id="searchform">
+				<div id="simpleSearch">
+						<input name="search" placeholder="Search" title="Search Robótica - ULE [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off">						<button type="submit" name="button" title="Search the pages for this text" id="searchButton"><img src="./PCL_OpenNI tutorial 5_ 3D object recognition (pipeline) - Robótica - ULE_files/search-ltr.png" alt="Search" width="12" height="13"></button>								<input type="hidden" name="title" value="Special:Search">
+		</div>
+	</form>
+</div>
+				</div>
+			</div>
+			<div id="mw-panel" class="collapsible-nav">
+					<div id="p-logo" role="banner"><a style="background-image: url(/mediawiki/skins/common/images/LogoRobotica_small.png);" href="http://robotica.unileon.es/mediawiki/index.php/Home" title="Visit the main page"></a></div>
+				<div class="portal first persistent" role="navigation" id="p-Contents" aria-labelledby="p-Contents-label">
+	<h3 id="p-Contents-label">Contents</h3>
+	<div class="body">
+		<ul>
+			<li id="n-Home"><a href="http://robotica.unileon.es/mediawiki/index.php/Home">Home</a></li>
+			<li id="n-People"><a href="http://robotica.unileon.es/mediawiki/index.php/People">People</a></li>
+			<li id="n-Publications"><a href="http://robotica.unileon.es/mediawiki/index.php/Publications">Publications</a></li>
+			<li id="n-Activities"><a href="http://robotica.unileon.es/mediawiki/index.php/Activities">Activities</a></li>
+			<li id="n-Projects"><a href="http://robotica.unileon.es/mediawiki/index.php/Projects">Projects</a></li>
+			<li id="n-Software"><a href="http://robotica.unileon.es/mediawiki/index.php/Software">Software</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal expanded" role="navigation" id="p-Wiki" aria-labelledby="p-Wiki-label">
+	<h3 id="p-Wiki-label" tabindex="2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#">Wiki</a></h3>
+	<div class="body" style="display: block;">
+		<ul>
+			<li id="n-recentchanges"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-randompage"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+			<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" rel="nofollow" title="The place to find out">Help</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+	<h3 id="p-tb-label" tabindex="3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)#">Tools</a></h3>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:WhatLinksHere/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChangesLinked/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li id="t-print"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+			<li id="t-permalink"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&oldid=4683" title="Permanent link to this revision of the page">Permanent link</a></li>
+			<li id="t-info"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)&action=info">Page information</a></li>
+		</ul>
+	</div>
+</div>
+			</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 1 April 2015, at 09:22.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,812 times.</li>
+									</ul>
+									<div style="clear:both"></div>
+		</div>
+		<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","skins.vector.collapsibleNav"],null,true);
+}</script>
+<script>if(window.mw){
+mw.loader.state({"site":"ready"});
+}</script>
+<!-- Served in 0.077 secs. -->
+	
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

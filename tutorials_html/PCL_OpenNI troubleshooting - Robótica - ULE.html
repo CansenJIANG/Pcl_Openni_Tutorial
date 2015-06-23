@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8"><title>PCL/OpenNI troubleshooting - Robótica - ULE</title>
+<meta name="generator" content="MediaWiki 1.22.5">
+<link rel="shortcut icon" href="http://robotica.unileon.es/mediawiki/skins/common/images/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://robotica.unileon.es/mediawiki/opensearch_desc.php" title="Robótica - ULE (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://robotica.unileon.es/mediawiki/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="Robótica - ULE Atom feed" href="http://robotica.unileon.es/mediawiki/index.php?title=Special:RecentChanges&feed=atom">
+<link rel="stylesheet" href="http://robotica.unileon.es/mediawiki/load.php?debug=false&lang=en&modules=ext.geshi.local%7Cmediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&only=styles&skin=vector&*">
+<style>
+.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:4250852ed2349a0d4d0fc6509a3e7d4c */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.autoellipsis-matched,.highlight{font-weight:bold}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9780324491b653a3780e2d029bdc140c */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;-webkit-box-shadow:0 2px 5px 0 #ccc;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(http://robotica.unileon.es/mediawiki/resources/mediawiki.action/images/green-checkmark.png?2014-04-10T08:01:40Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9b39df22efb31003b8c266f2194113b0 */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{text-decoration:none;color:black}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:52b1797f70c7e4094dfa4191101944e8 */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:c2f15db357ed1b34653e004540bd5f70 */</style>
+
+<script src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/load.php"></script><script src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/load(1).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"PCL/OpenNI_troubleshooting","wgTitle":"PCL/OpenNI troubleshooting","wgCurRevisionId":4693,"wgRevisionId":4693,"wgArticleId":116,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"PCL/OpenNI_troubleshooting","wgIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"vector-simplesearch":1,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,
+"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: wikidb:resourceloader:filter:minify-js:7:5a69c7e0fa6557851b6dea8a62efaffb */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/load(2).php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-bash {line-height: normal;}
+.source-bash li, .source-bash pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for bash
+ * CSS class: source-bash, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.bash.source-bash .de1, .bash.source-bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.bash.source-bash  {font-family:monospace;}
+.bash.source-bash .imp {font-weight: bold; color: red;}
+.bash.source-bash li, .bash.source-bash .li1 {font-weight: normal; vertical-align:top;}
+.bash.source-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.bash.source-bash .li2 {font-weight: bold; vertical-align:top;}
+.bash.source-bash .kw1 {color: #000000; font-weight: bold;}
+.bash.source-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.bash.source-bash .kw3 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .co0 {color: #666666; font-style: italic;}
+.bash.source-bash .co1 {color: #800000;}
+.bash.source-bash .co2 {color: #cc0000; font-style: italic;}
+.bash.source-bash .co3 {color: #000000; font-weight: bold;}
+.bash.source-bash .es1 {color: #000099; font-weight: bold;}
+.bash.source-bash .es2 {color: #007800;}
+.bash.source-bash .es3 {color: #007800;}
+.bash.source-bash .es4 {color: #007800;}
+.bash.source-bash .es5 {color: #780078;}
+.bash.source-bash .es_h {color: #000099; font-weight: bold;}
+.bash.source-bash .br0 {color: #7a0874; font-weight: bold;}
+.bash.source-bash .sy0 {color: #000000; font-weight: bold;}
+.bash.source-bash .st0 {color: #ff0000;}
+.bash.source-bash .st_h {color: #ff0000;}
+.bash.source-bash .nu0 {color: #000000;}
+.bash.source-bash .re0 {color: #007800;}
+.bash.source-bash .re1 {color: #007800;}
+.bash.source-bash .re2 {color: #007800;}
+.bash.source-bash .re4 {color: #007800;}
+.bash.source-bash .re5 {color: #660033;}
+.bash.source-bash .ln-xtra, .bash.source-bash li.ln-xtra, .bash.source-bash div.ln-xtra {background-color: #ffc;}
+.bash.source-bash span.xtra { display:block; }
+
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-make {line-height: normal;}
+.source-make li, .source-make pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for make
+ * CSS class: source-make, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.make.source-make .de1, .make.source-make .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.make.source-make  {font-family:monospace;}
+.make.source-make .imp {font-weight: bold; color: red;}
+.make.source-make li, .make.source-make .li1 {font-weight: normal; vertical-align:top;}
+.make.source-make .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.make.source-make .li2 {font-weight: bold; vertical-align:top;}
+.make.source-make .kw1 {color: #666622; font-weight: bold;}
+.make.source-make .kw2 {color: #990000;}
+.make.source-make .co1 {color: #339900; font-style: italic;}
+.make.source-make .co2 {color: #000099; font-weight: bold;}
+.make.source-make .es0 {color: #000099; font-weight: bold;}
+.make.source-make .br0 {color: #004400;}
+.make.source-make .sy0 {color: #004400;}
+.make.source-make .st0 {color: #CC2200;}
+.make.source-make .nu0 {color: #CC2200;}
+.make.source-make .re0 {color: #000088; font-weight: bold;}
+.make.source-make .re1 {color: #0000CC; font-weight: bold;}
+.make.source-make .re2 {color: #000088;}
+.make.source-make .ln-xtra, .make.source-make li.ln-xtra, .make.source-make div.ln-xtra {background-color: #ffc;}
+.make.source-make span.xtra { display:block; }
+
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/mediawiki/skins/vector/csshover.min.htc")}</style><![endif]--><script async="" src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/load(3).php"></script></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PCL_OpenNI_troubleshooting skin-vector action-view vector-animateLayout">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">PCL/OpenNI troubleshooting</span></h1>
+			<div id="bodyContent">
+								<div id="siteSub">From Robótica - ULE</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#mw-navigation">navigation</a>, 					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p>
+<hr>
+<hr>
+<p><br>
+This page tries to cover all of the issues I ran into while trying to get my Kinect device ready for developing with PCL. If you have any questions regarding this subject or know of a different bug, feel free to send me an email describing it, and I will add it to this section. Just remember to try Google first!
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#CUDA"><span class="tocnumber">1</span> <span class="toctext">CUDA</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Unsupported_configuration"><span class="tocnumber">1.1</span> <span class="toctext">Unsupported configuration</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Unsupported_GPU_architecture"><span class="tocnumber">1.2</span> <span class="toctext">Unsupported GPU architecture</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Apt"><span class="tocnumber">2</span> <span class="toctext">Apt</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Unmet_dependencies"><span class="tocnumber">2.1</span> <span class="toctext">Unmet dependencies</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Trying_to_overwrite_X.2C_which_is_also_in_package_Y"><span class="tocnumber">2.2</span> <span class="toctext">Trying to overwrite X, which is also in package Y</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#CMake"><span class="tocnumber">3</span> <span class="toctext">CMake</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#VTK_warnings"><span class="tocnumber">3.1</span> <span class="toctext">VTK warnings</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#QVTK_LIBRARY_DEBUG_or_QVTK_LIBRARY_RELEASE_not_found"><span class="tocnumber">3.2</span> <span class="toctext">QVTK_LIBRARY_DEBUG or QVTK_LIBRARY_RELEASE not found</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#GCC"><span class="tocnumber">4</span> <span class="toctext">GCC</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#No_such_instruction"><span class="tocnumber">4.1</span> <span class="toctext">No such instruction</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#OpenNI"><span class="tocnumber">5</span> <span class="toctext">OpenNI</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#No_device_found_.2F_No_devices_connected"><span class="tocnumber">5.1</span> <span class="toctext">No device found / No devices connected</span></a>
+<ul>
+<li class="toclevel-3 tocsection-14"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Microsoft_Kinect"><span class="tocnumber">5.1.1</span> <span class="toctext">Microsoft Kinect</span></a></li>
+<li class="toclevel-3 tocsection-15"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#ASUS_Xtion_PRO"><span class="tocnumber">5.1.2</span> <span class="toctext">ASUS Xtion PRO</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-16"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#glInit.28.29_not_found_.2F_OpenGL_isues"><span class="tocnumber">5.2</span> <span class="toctext">glInit() not found / OpenGL isues</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#Permission_denied"><span class="tocnumber">5.3</span> <span class="toctext">Permission denied</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="CUDA">CUDA</span></h1>
+<h2><span class="mw-headline" id="Unsupported_configuration">Unsupported configuration</span></h2>
+<p>When you run the CUDA installer on a fairly modern Linux, you may get a message saying that you are trying to install it on an unsupported configuration. What this means is that CUDA can not work with the newest versions of the GCC compiler. As of version 7, the highest compatible GCC is 4.8.2 for Ubuntu 14.04 LTS and 4.9.1 for 14.10 (12.04 LTS has been deprecated). Check the compatibility table <a rel="nofollow" class="external text" href="http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/#system-requirements">here</a>.
+</p><p>In order to solve this, you must install an older version, like 4.6 for Ubuntu 12.04, and set it as the "official" alternative for compiling (change 4.7 for your current version):
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> gcc-4.6 g++-4.6
+<span class="kw2">sudo</span> update-alternatives <span class="re5">--install</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span><span class="kw2">gcc</span> <span class="kw2">gcc</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span>gcc-4.6 60 <span class="re5">--slave</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span><span class="kw2">g++</span> <span class="kw2">g++</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span>g++-4.6 
+<span class="kw2">sudo</span> update-alternatives <span class="re5">--install</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span><span class="kw2">gcc</span> <span class="kw2">gcc</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span>gcc-4.7 40 <span class="re5">--slave</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span><span class="kw2">g++</span> <span class="kw2">g++</span> <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span>g++-<span class="nu0">4.7</span></pre></div></div>
+<p>Now, run the following command and choose GCC 4.6 as alternative:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> update-alternatives <span class="re5">--config</span> <span class="kw2">gcc</span></pre></div></div>
+<p>Whenever you want to switch back to GCC 4.7 or newer, re-run the previous command. Please mind, that both C and C++ compilers are changed, not just C.
+</p>
+<h2><span class="mw-headline" id="Unsupported_GPU_architecture">Unsupported GPU architecture</span></h2>
+<p>When compiling PCL with CUDA support enabled, you may get a <span style="color:#FF1493"><i>"nvcc fatal&nbsp;: Unsupported gpu architecture 'compute_52'"</i></span> error or similar. This means that your current graphic card does not support some of the capabilities of the most modern versions of CUDA, and the SDK can not compile the binaries. You can see the compatibility info for your card model <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/CUDA#Supported_GPUs">here</a>.
+</p><p>In order to solve this, you must clean your PCL build folder by erasing all content:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">rm</span> <span class="re5">-rf</span> .<span class="sy0">/*</span></pre></div></div>
+<p>Configure again with CMake:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">cmake ..
+ccmake .</pre></div></div>
+<p>And look for the <span style="color:#FF1493">"CUDA_ARCH_BIN"</span> option. Edit it and remove any architectures that are not compatible with your GPU, like for example 5.2 (in the above case). Then, configure and generate as usual with <span style="color:#228B22"><b>C</b></span> and <span style="color:#228B22"><b>G</b></span>, and compile.
+</p>
+<h1><span class="mw-headline" id="Apt">Apt</span></h1>
+<h2><span class="mw-headline" id="Unmet_dependencies">Unmet dependencies</span></h2>
+<p>If you get an error like <span style="color:#FF1493"><i>"Depends: X but it is not going to be installed"</i></span> while installing a package through apt (<i>X</i> being the name of another package), it probably means that there is a conflict between two repositories offering different versions of the same package (e.g. PCL and ROS ones). To solve this, you will have to completely remove one of the repositories and stick with the other.
+</p><p>Another possibility is that the package in question is just broken, maybe because it is deprecated and pending removal, or because you are using a very recent release of Ubuntu and there is no version for it. I used to get this error a lot when trying to install OpenNI, but I solved it by following the advice above. Also, you can try compiling everything from source.
+</p>
+<h2><span class="mw-headline" id="Trying_to_overwrite_X.2C_which_is_also_in_package_Y">Trying to overwrite X, which is also in package Y</span></h2>
+<p>During the installation of the PrimeSense drivers (using the ROS approach), you may get an error that says <span style="color:#FF1493"><i>"trying to overwrite '/etc/openni/GlobalDefaults.ini', which is also in package libopenni-sensor-pointclouds0"</i></span>. This is actually a common problem, that can happen with other packages. It means that a file included in one of the new packages is also provided by another package that is already installed. In this case, it is the <span style="color:#1E90FF"><i>/etc/openni/GlobalDefaults.ini</i></span> file, which is already included in the package <span style="color:#228B22"><i>libopenni-sensor-pointclouds0</i></span>, making the installation of <span style="color:#228B22"><i>libopenni-sensor-primesense0</i></span> fail.
+</p><p>In order to fix it, run the following command to manually retry the installation (change the file name as necessary):
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">dpkg</span> <span class="re5">-i</span> <span class="re5">--force-overwrite</span> <span class="sy0">/</span>var<span class="sy0">/</span>cache<span class="sy0">/</span>apt<span class="sy0">/</span>archives<span class="sy0">/</span>libopenni-sensor-primesense0_5.1.0.41-<span class="nu0">3</span>+trusty1_amd64.deb</pre></div></div>
+<p>This time, you will be prompted whether or not you want to overwrite the file. Choose yes, and then use the following command to make sure there are no packages left pending:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="re5">-f</span> <span class="kw2">install</span></pre></div></div>
+<h1><span class="mw-headline" id="CMake">CMake</span></h1>
+<h2><span class="mw-headline" id="VTK_warnings">VTK warnings</span></h2>
+<p>When running CMake to configure your PCL project before building it, you may get a lot of messages that say something like this:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="make source-make" style="font-family:monospace;"><pre class="de1"><span class="sy0">--</span> The imported target <span class="st0">"vtkPythonCore"</span> references the file
+    <span class="st0">"/usr/lib/libvtkPythonCore.so.5.8.0"</span>
+but this file does not exist<span class="sy0">.</span>  Possible reasons <span class="kw1">include</span><span class="sy0">:</span>
+<span class="sy0">*</span> The file was deleted<span class="sy0">,</span> renamed<span class="sy0">,</span> or moved to another location<span class="sy0">.</span>
+<span class="sy0">*</span> An install or uninstall procedure did not complete successfully<span class="sy0">.</span>
+<span class="sy0">*</span> The installation package was faulty and contained
+    <span class="st0">"/usr/lib/vtk-5.8/VTKTargets-release.cmake"</span>
+but not all the files it references<span class="sy0">.</span></pre></div></div>
+<p>The program will build anyway, so this is not a big issue. But if you find the messages annoying, you can fix it by installing two packages:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> python-vtk libvtk-java</pre></div></div>
+<h2><span class="mw-headline" id="QVTK_LIBRARY_DEBUG_or_QVTK_LIBRARY_RELEASE_not_found">QVTK_LIBRARY_DEBUG or QVTK_LIBRARY_RELEASE not found</span></h2>
+<p>If this error comes up when trying to configure the CMake build of PCL trunk, then you must install these two packages:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">apt-get</span> <span class="kw2">install</span> libvtk6-dev libqt5opengl5-dev</pre></div></div>
+<p>Doing this will replace VTK 5 with version 6 and Qt 4 with version 5, which are the ones now officially supported by PCL 1.8.
+</p>
+<h1><span class="mw-headline" id="GCC">GCC</span></h1>
+<h2><span class="mw-headline" id="No_such_instruction">No such instruction</span></h2>
+<p>When building PCL, it is possible that compilation will fail with a message like <span style="color:#FF1493"><i>"no such instruction: `vfmadd312ss 32(%rsp),%xmm15,%xmm7'"</i></span>. What this means is that you have a combination of a brand new i7 CPU and an outdated compiler (such as GCC 4.6, which comes with Ubuntu 12.04). You could try to update to GCC 4.8, with it is a bit complicated, but there is an easier solution. Configure again the project with:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">ccmake .</pre></div></div>
+<p>Now, you must press <span style="color:#228B22"><b>T</b></span> to toggle advanced mode. Then, look for the <span style="color:#FF1493">"CMAKE_C_FLAGS"</span> and <span style="color:#FF1493">"CMAKE_CXX_FLAGS"</span> options. Edit them and add <span style="color:#FF1493">"-march=corei7"</span> (by default, <span style="color:#FF1493">"-march=native"</span> is set in the Makefiles). Configure and generate (<span style="color:#228B22"><b>C</b></span> and <span style="color:#228B22"><b>G</b></span>), and resume the compilation.
+</p>
+<h1><span class="mw-headline" id="OpenNI">OpenNI</span></h1>
+<h2><span class="mw-headline" id="No_device_found_.2F_No_devices_connected">No device found / No devices connected</span></h2>
+<h3><span class="mw-headline" id="Microsoft_Kinect">Microsoft Kinect</span></h3>
+<p>If your system does not seem to be able to use Kinect, despite it being correctly plugged and listed by <span style="color:#228B22"><i>lsusb</i></span>, then you may have a problem with the installed drivers. I eventually discovered that, in 32-bit Ubuntu, it was necessary to downgrade <span style="color:#228B22"><i>openni-dev</i></span> and <span style="color:#228B22"><i>ps-engine</i></span> to versions 1.3.2.1 and 5.0.3.3 respectively, using your package manager.
+</p><p>If you use <span style="color:#228B22"><i>Synaptic</i></span>, the instructions are simple. Select both mentioned packages, press <span style="color:#228B22"><b>Ctrl+E</b></span> to choose the desired version you want installed, and then apply the changes, accepting to overwrite any files. Then, to prevent them from being restored in the next upgrade, select each and click the <span style="color:#228B22"><i>"Lock Version"</i></span> option in the <span style="color:#228B22"><i>"Package"</i></span> menu. The packages will then be picked up by the <span style="color:#FF1493">"Status: Pinned"</span> filter on the left. Reboot, and everything should be working now.
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:702px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Synaptic_Kinect_lock.png" class="image"><img alt="" src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/Synaptic_Kinect_lock.png" width="700" height="560" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Synaptic_Kinect_lock.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Downgraded and locked <i>openni-dev</i> and <i>ps-engine</i> in Synaptic package manager.</div></div></div></div>
+<h3><span class="mw-headline" id="ASUS_Xtion_PRO">ASUS Xtion PRO</span></h3>
+<p>In order to get our Xtion device working with OpenNI, we have to modify a configuration file:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">nano</span> <span class="sy0">/</span>etc<span class="sy0">/</span>openni<span class="sy0">/</span>GlobalDefaults.ini</pre></div></div>
+<p>If you installed OpenNI manually instead of using the repositories, the file is located in a different path:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">nano</span> <span class="sy0">/</span>usr<span class="sy0">/</span>etc<span class="sy0">/</span>primesense<span class="sy0">/</span>GlobalDefaults.ini</pre></div></div>
+<p>Find (<span style="color:#228B22"><b>Ctrl+W</b></span>) the line that says <span style="color:#FF1493">";UsbInterface=2"</span> and uncomment it (remove the semicolon at the start). Save the file (<span style="color:#228B22"><b>Ctrl+O</b></span>) and close (<span style="color:#228B22"><b>Ctrl+X</b></span>). Reboot your computer, and you should be able to use your Xtion device with OpenNI/PCL. Whenever you want to switch back to a Kinect, you must comment the line, or else you will get the same <span style="color:#FF1493"><i>"No devices connected"</i></span> or <span style="color:#FF1493"><i>"USB interface is not supported!"</i></span> error.
+</p><p>If you still get this error, or you have another problem, like inconsistent framerate or freeze-ups, check that your Xtion is not plugged to an USB 3.0 port. Sadly, the firmware has a bug that prevents the device from working with 3.0 ports. Either switch to a 2.0 one (if your computer does not have one, you can use a <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/USB_hub">hub</a>) or try applying <a rel="nofollow" class="external text" href="https://github.com/nh2/asus-xtion-fix">this fix</a>.
+</p>
+<h2><span class="mw-headline" id="glInit.28.29_not_found_.2F_OpenGL_isues">glInit() not found / OpenGL isues</span></h2>
+<p>If you get this error while compiling OpenNI, and you are sure you have installed all dependencies, then this is due to faulty Makefiles that do not link against GL libraries where they should.
+</p><p>Go to the <span style="color:#FF8C00"><i>Platform/Linux/Build/Samples/</i></span> subdirectory and find the samples that are giving errors (look at the compiler output to find them). For each one, enter its subdirectory and open the <span style="color:#1E90FF"><i>Makefile</i></span> you will find there. Go to the line that says:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">USED_LIBS += glut</pre></div></div>
+<p>And change it to the following:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1">USED_LIBS += glut GL</pre></div></div>
+<p>The samples should now compile.
+</p>
+<h2><span class="mw-headline" id="Permission_denied">Permission denied</span></h2>
+<p>If you get this error related to some header (.h) in <span style="color:#FF8C00"><i>/usr/include/</i></span>, it means that OpenNI's installer has given the wrong permissions when moving files there, and the compiler can not access them. Locate the faulty file and change its permissions to allow reading for everyone:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">chmod</span> +r <span class="re5">-R</span> <span class="sy0">/</span>usr<span class="sy0">/</span>include<span class="sy0">/&lt;</span><span class="kw2">file</span><span class="sy0">&gt;</span></pre></div></div>
+<p>For example, a very drastic (and not recommended) way of fixing this for OpenNI's headers would be:
+</p>
+<div dir="ltr" class="mw-geshi mw-content-ltr"><div class="bash source-bash" style="font-family:monospace;"><pre class="de1"><span class="kw2">sudo</span> <span class="kw2">chmod</span> 0777 <span class="re5">-R</span> <span class="sy0">/</span>usr<span class="sy0">/</span>include<span class="sy0">/</span>ni<span class="sy0">/</span></pre></div></div>
+<p><br>
+</p>
+<hr>
+<hr>
+<p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p><p>Links to articles:
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics" title="PCL/OpenNI tutorial 0: The very basics">PCL/OpenNI tutorial 0: The very basics</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing" title="PCL/OpenNI tutorial 1: Installing and testing">PCL/OpenNI tutorial 1: Installing and testing</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)" title="PCL/OpenNI tutorial 2: Cloud processing (basic)">PCL/OpenNI tutorial 2: Cloud processing (basic)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">PCL/OpenNI tutorial 3: Cloud processing (advanced)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">PCL/OpenNI tutorial 4: 3D object recognition (descriptors)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)" title="PCL/OpenNI tutorial 5: 3D object recognition (pipeline)">PCL/OpenNI tutorial 5: 3D object recognition (pipeline)</a>
+</p><p><strong class="selflink">PCL/OpenNI troubleshooting</strong>
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.209 seconds
+Real time usage: 0.228 seconds
+Preprocessor visited node count: 233/1000000
+Preprocessor generated node count: 460/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:116-0!*!0!!en!2!* and timestamp 20150622172443
+ -->
+</div>								<div class="printfooter">
+				Retrieved from "<a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&oldid=4693">http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&amp;oldid=4693</a>"				</div>
+												<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+				<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+	<h3 id="p-personal-label">Personal tools</h3>
+	<ul>
+<li id="pt-login"><a href="http://robotica.unileon.es/mediawiki/index.php?title=Special:UserLogin&returnto=PCL%2FOpenNI+troubleshooting" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>	</ul>
+</div>
+				<div id="left-navigation">
+					<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+	<h3 id="p-namespaces-label">Namespaces</h3>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="./PCL_OpenNI troubleshooting - Robótica - ULE_files/PCL_OpenNI troubleshooting - Robótica - ULE.html" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk" class="new"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=Talk:PCL/OpenNI_troubleshooting&action=edit&redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+	<h3 id="mw-vector-current-variant">
+		</h3>
+	<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+				</div>
+				<div id="right-navigation">
+					<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+	<h3 id="p-views-label">Views</h3>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="./PCL_OpenNI troubleshooting - Robótica - ULE_files/PCL_OpenNI troubleshooting - Robótica - ULE.html">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+	<h3 id="p-cactions-label" tabindex="0"><span>Actions</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+<div id="p-search" role="search">
+	<h3><label for="searchInput">Search</label></h3>
+	<form action="http://robotica.unileon.es/mediawiki/index.php" id="searchform">
+				<div id="simpleSearch">
+						<input name="search" placeholder="Search" title="Search Robótica - ULE [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off">						<button type="submit" name="button" title="Search the pages for this text" id="searchButton"><img src="./PCL_OpenNI troubleshooting - Robótica - ULE_files/search-ltr.png" alt="Search" width="12" height="13"></button>								<input type="hidden" name="title" value="Special:Search">
+		</div>
+	</form>
+</div>
+				</div>
+			</div>
+			<div id="mw-panel" class="collapsible-nav">
+					<div id="p-logo" role="banner"><a style="background-image: url(/mediawiki/skins/common/images/LogoRobotica_small.png);" href="http://robotica.unileon.es/mediawiki/index.php/Home" title="Visit the main page"></a></div>
+				<div class="portal first persistent" role="navigation" id="p-Contents" aria-labelledby="p-Contents-label">
+	<h3 id="p-Contents-label">Contents</h3>
+	<div class="body">
+		<ul>
+			<li id="n-Home"><a href="http://robotica.unileon.es/mediawiki/index.php/Home">Home</a></li>
+			<li id="n-People"><a href="http://robotica.unileon.es/mediawiki/index.php/People">People</a></li>
+			<li id="n-Publications"><a href="http://robotica.unileon.es/mediawiki/index.php/Publications">Publications</a></li>
+			<li id="n-Activities"><a href="http://robotica.unileon.es/mediawiki/index.php/Activities">Activities</a></li>
+			<li id="n-Projects"><a href="http://robotica.unileon.es/mediawiki/index.php/Projects">Projects</a></li>
+			<li id="n-Software"><a href="http://robotica.unileon.es/mediawiki/index.php/Software">Software</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal expanded" role="navigation" id="p-Wiki" aria-labelledby="p-Wiki-label">
+	<h3 id="p-Wiki-label" tabindex="2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#">Wiki</a></h3>
+	<div class="body" style="display: block;">
+		<ul>
+			<li id="n-recentchanges"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-randompage"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+			<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" rel="nofollow" title="The place to find out">Help</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+	<h3 id="p-tb-label" tabindex="3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting#">Tools</a></h3>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:WhatLinksHere/PCL/OpenNI_troubleshooting" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChangesLinked/PCL/OpenNI_troubleshooting" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li id="t-print"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+			<li id="t-permalink"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&oldid=4693" title="Permanent link to this revision of the page">Permanent link</a></li>
+			<li id="t-info"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_troubleshooting&action=info">Page information</a></li>
+		</ul>
+	</div>
+</div>
+			</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 May 2015, at 09:08.</li>
+											<li id="footer-info-viewcount">This page has been accessed 9,064 times.</li>
+									</ul>
+									<div style="clear:both"></div>
+		</div>
+		<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","skins.vector.collapsibleNav"],null,true);
+}</script>
+<script>if(window.mw){
+mw.loader.state({"site":"ready"});
+}</script>
+<!-- Served in 0.072 secs. -->
+	
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

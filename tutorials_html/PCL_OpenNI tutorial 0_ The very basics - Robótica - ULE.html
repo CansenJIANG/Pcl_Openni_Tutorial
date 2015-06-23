@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8"><title>PCL/OpenNI tutorial 0: The very basics - Robótica - ULE</title>
+<meta name="generator" content="MediaWiki 1.22.5">
+<link rel="shortcut icon" href="http://robotica.unileon.es/mediawiki/skins/common/images/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://robotica.unileon.es/mediawiki/opensearch_desc.php" title="Robótica - ULE (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://robotica.unileon.es/mediawiki/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="Robótica - ULE Atom feed" href="http://robotica.unileon.es/mediawiki/index.php?title=Special:RecentChanges&feed=atom">
+<link rel="stylesheet" href="http://robotica.unileon.es/mediawiki/load.php?debug=false&lang=en&modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&only=styles&skin=vector&*">
+<style>
+.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:4250852ed2349a0d4d0fc6509a3e7d4c */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.autoellipsis-matched,.highlight{font-weight:bold}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9780324491b653a3780e2d029bdc140c */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;-webkit-box-shadow:0 2px 5px 0 #ccc;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(http://robotica.unileon.es/mediawiki/resources/mediawiki.action/images/green-checkmark.png?2014-04-10T08:01:40Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9b39df22efb31003b8c266f2194113b0 */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{text-decoration:none;color:black}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:52b1797f70c7e4094dfa4191101944e8 */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:c2f15db357ed1b34653e004540bd5f70 */</style>
+
+<script src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/load.php"></script><script src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/load(1).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"PCL/OpenNI_tutorial_0:_The_very_basics","wgTitle":"PCL/OpenNI tutorial 0: The very basics","wgCurRevisionId":4608,"wgRevisionId":4608,"wgArticleId":261,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"PCL/OpenNI_tutorial_0:_The_very_basics","wgIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"vector-simplesearch":1,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,
+"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: wikidb:resourceloader:filter:minify-js:7:5a69c7e0fa6557851b6dea8a62efaffb */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/load(2).php"></script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/mediawiki/skins/vector/csshover.min.htc")}</style><![endif]--><script async="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/load(3).php"></script></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-PCL_OpenNI_tutorial_0_The_very_basics skin-vector action-view vector-animateLayout">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">PCL/OpenNI tutorial 0: The very basics</span></h1>
+			<div id="bodyContent">
+								<div id="siteSub">From Robótica - ULE</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#mw-navigation">navigation</a>, 					<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p>
+<hr>
+<hr>
+<p><br>
+One of the most important fields of robotics is <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Computer_vision">computer vision</a>. A machine that is able to "see" its environment can have a lot of applications. For example, think of a robot in a production line that grabs some parts and moves them somewhere else. Or a surveillance system that is able to recognize how many people are there in a room. Or a biped robot making its way through a room, evading obstacles such as tables, chairs or bystanders.
+</p><p>For many years, the most common sensors for computer vision were 2D cameras, that retrieved a RGB image of the scene (like all the digital cameras that are so common nowadays, in our laptops or smarphones). Algorithms exist that are able to find an object in a picture, even if it is rotated or scaled, or that can retrieve motion data from a stream of video, and even perform 3D analysis to track the camera's position. All these years' worth of research is now available in libraries like <a rel="nofollow" class="external text" href="http://opencv.org/">OpenCV</a> (Open Source Computer Vision Library).
+</p><p>3D sensors are available, too. The biggest advantage they offer is that it is trivial to get measurements about distances and motion, but the addition of a new dimension makes calculations expensive. Working with the data they retrieve is a lot different that working with a 2D image, and texture information is rarely used.
+</p><p>During the next tutorials I will explain how to get a common depth sensor working with a 3D processing library.
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Depth_sensors"><span class="tocnumber">1</span> <span class="toctext">Depth sensors</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Stereo_cameras"><span class="tocnumber">1.1</span> <span class="toctext">Stereo cameras</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Time-of-flight"><span class="tocnumber">1.2</span> <span class="toctext">Time-of-flight</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#LIDAR"><span class="tocnumber">1.2.1</span> <span class="toctext">LIDAR</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#ToF_cameras"><span class="tocnumber">1.2.2</span> <span class="toctext">ToF cameras</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-6"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Structured_light"><span class="tocnumber">1.3</span> <span class="toctext">Structured light</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Point_clouds"><span class="tocnumber">2</span> <span class="toctext">Point clouds</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Point_Cloud_Library"><span class="tocnumber">2.1</span> <span class="toctext">Point Cloud Library</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#Conclusion"><span class="tocnumber">3</span> <span class="toctext">Conclusion</span></a></li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Depth_sensors">Depth sensors</span></h1>
+<p>3D or depth sensors give you precise information about the distance to the "points" in the scene (a point would be the 3D equivalent of a pixel). There are several types of depth sensors, each working with a different technique. Some sensors are slow, some are fast. Some give accurate, high-res measurements, some are noisy and low-res. Some are expensive, some can be bought for a hundred bucks. There is no "perfect" sensor and which one you choose will depend on your budget and the project that you want to implement.
+</p>
+<h2><span class="mw-headline" id="Stereo_cameras">Stereo cameras</span></h2>
+<p><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Computer_stereo_vision">Stereo cameras</a> are the only passive measurement device of the list. They are essentially two identical cameras assembled together (some centimeters apart), that capture slightly different scenes. By computing the differences between both scenes, it is possible to infer depth information about the points in each image.
+</p><p>A stereo pair is cheap, but perhaps the least accurate sensor. Ideally, it would require perfect calibration of both cameras, which is unfeasible in practice. Bad light conditions will render it useless. Also, because of the way the algorithm works (detecting corresponding points of interest in both images), they give poor results with empty scenes or objects that have plain textures, with few interest points. Some models circumvent this by projecting a grid or texture of light on the scene (active stereo vision).
+</p><p>I will not go into detail about the math involved with the triangulation process, as you can find it on the internet.
+</p><p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:202px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Stereo.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/Stereo.png" width="200" height="102" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Stereo.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Example of stereo camera.</div></div></div></div>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Time-of-flight">Time-of-flight</span></h2>
+<p><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Time_of_flight">Time-of-flight</a> (ToF) sensors work by measuring the time it has taken a ray or pulse of light to travel a certain distance. Because the speed of light is a known constant, a simple formula can be used to obtain the range to the object. These sensors are not affected by light conditions and have the potential to be very precise.
+</p>
+<h3><span class="mw-headline" id="LIDAR">LIDAR</span></h3>
+<p>A <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Lidar">LIDAR</a> (light+radar) is just a common laser range finder mounted on a platform that is able to rotate very fast, scanning the scene point by point. They are very precise sensors, but also expensive, and they do not retrieve texture information. They have been used for decades in many different fields like meteorology, archaeology or astronomy. LIDAR devices can be mounted on satellites, planes or mobile robots. The data retrieved by a LIDAR has very high resolution, so some processing is needed in order to use it for real-time applications.
+</p><p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:202px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:LIDAR.jpg" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/LIDAR.jpg" width="200" height="157" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:LIDAR.jpg" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>LIDAR mounted on a mobile robot (image from Wikimedia Commons).</div></div></div></div>
+<p><br>
+</p>
+<h3><span class="mw-headline" id="ToF_cameras">ToF cameras</span></h3>
+<p>A <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Time-of-flight_camera">time-of-flight camera</a> does not perform point-by-point scans like a LIDAR does. Instead, it employs a single pulse of light to capture the whole scene, once per frame. Thanks to that, they can work a lot faster, with some models topping above 100 Hz. The price to pay is a low resolution of 320×240 or even less. Depth measurements have an accuracy of about 1cm. ToF cameras cost less than LIDAR sensors, but we are talking about 4000 $ or so. Color information is not retrieved.
+</p><p>The new <a rel="nofollow" class="external text" href="http://www.microsoft.com/en-us/kinectforwindows/">Kinect v2</a> is a ToF sensor that works at 512×424 internally, and it includes a 1920x1080 RGB camera.
+</p><p><br>
+</p>
+<center><ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:ToFcam.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/ToFcam.png" width="73" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Time-of-flight camera (image from Wikimedia Commons).
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Kinect2.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/Kinect2.png" width="259" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Microsoft Kinect v2.
+</p>
+			</div>
+		</div></li>
+</ul></center>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Structured_light">Structured light</span></h2>
+<p><a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Structured-light_3D_scanner">Structured light</a> sensors (like Kinect and Xtion) work by projecting a pattern of infrarred light (for example, a grid of lines, or a "constellation" of points) on top of the scene's objects. This pattern is seen distorted when looked from a perspective different from the projector's. By analysing this distortion, information about the depth can be retrieved, and the surface(s) reconstructed.
+</p><p>The resolution and speed of these sensors are similar to common VGA cameras, usually 640x480 at 30 FPS (actually less because of the way this type of sensors work, Kinect uses 320x240 internally, the rest of the data is extrapolated to "fill the gaps"). Precision is similar to that of ToF cameras, 1cm more or less, with a maximum range of 3-6m, but they tend to have trouble seeing small objects. They are a lot cheaper than any other sensors, with a first generation Kinect now costing around 100 $, and hence they have become a lot popular in the last years. In the next tutorial, I will explain the installation and usage of one of these cameras.
+</p><p><br>
+</p>
+<center><ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Kinect.jpg" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/Kinect.jpg" width="290" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>Microsoft Kinect.
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 335px"><div style="width: 335px">
+			<div class="thumb" style="width: 330px;"><div style="margin:15px auto;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Xtion.jpg" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/Xtion.jpg" width="243" height="120"></a></div></div>
+			<div class="gallerytext">
+<p>ASUS Xtion PRO (the PRO LIVE model includes a RGB camera).
+</p>
+			</div>
+		</div></li>
+</ul></center>
+<p><br>
+</p>
+<div class="center"><div class="thumb tnone"><div class="thumbinner" style="width:202px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Structured_light.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/Structured_light.png" width="200" height="150" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Structured_light.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Infrarred light pattern (dots) projected by Kinect.</div></div></div></div>
+<p><br>
+</p>
+<h1><span class="mw-headline" id="Point_clouds">Point clouds</span></h1>
+<div class="thumb tright"><div class="thumbinner" style="width:202px;"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Point_cloud.png" class="image"><img alt="" src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/Point_cloud.png" width="200" height="116" class="thumbimage"></a>  <div class="thumbcaption"><div class="magnify"><a href="http://robotica.unileon.es/mediawiki/index.php/File:Point_cloud.png" class="internal" title="Enlarge"><img src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/magnify-clip.png" width="15" height="11" alt=""></a></div>Example of a point cloud.</div></div></div>
+<p>Depth sensors return 3D data in the form of a <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Point_cloud"><i>point cloud</i></a>. A point cloud is a set of points in three-dimensional space, each with its own XYZ coordinates. In the case of stereo, ToF or structured light cameras, every point corresponds to exactly one pixel of the captured image. Optionally, points can store additional information, like color (if the sensor has a RGB camera that it uses to put texture on them). If you have background with 3D modelling software, then you must know that point clouds can be converted to triangular meshes with certain algorithms, but this is rarely done, and cloud processing is performed with the original set of data.
+</p>
+<h2><span class="mw-headline" id="Point_Cloud_Library">Point Cloud Library</span></h2>
+<p><a rel="nofollow" class="external text" href="http://www.pointclouds.org/">Point Cloud Library (PCL)</a> is a project started in early 2010 by <a rel="nofollow" class="external text" href="http://www.willowgarage.com/">Willow Garage</a>, the same robotics research company behind the <a rel="nofollow" class="external text" href="http://www.ros.org/">Robot Operating System (ROS)</a> and OpenCV (and they also sell <a rel="nofollow" class="external text" href="http://www.willowgarage.com/robot/overview">robots</a> like TurtleBot, too). The first version was <a rel="nofollow" class="external text" href="http://www.pointclouds.org/assets/pdf/pcl_icra2011.pdf">fully introduced</a> in 2011, and it has been actively maintained ever since.
+</p><p>PCL aims to be an one-for-all solution for point cloud and 3D processing. It is an open source, multiplatform library divided in many <a rel="nofollow" class="external text" href="http://pointclouds.org/documentation/tutorials/walkthrough.php">submodules</a> for different tasks, like visualization, filtering, segmentation, registration, searching, feature estimation... Additionally, it can be used to retrieve data from a list of compatible sensors, so it is an obvious choice for our tutorials, because you will not have to compile or install dozens of separate libraries.
+</p><p>Apart from Willow Garage, PCL is backed by <a rel="nofollow" class="external text" href="http://www.openperception.org/">Open Perception</a>, a non-profit organization founded by Radu Bogdan Rusu, one of the most active developers of the library. I recommend you to read his very interesting <a rel="nofollow" class="external text" href="http://files.rbrusu.com/publications/RusuPhDThesis.pdf">dissertation</a>, written in 2009, which introduces and details many concepts and techniques that have been implemented into PCL.
+</p>
+<h1><span class="mw-headline" id="Conclusion">Conclusion</span></h1>
+<p>Over the course of the next tutorials I will tell you how to install PCL in a Linux environment, how to retrieve point clouds from a sensor like Kinect or Xtion, and how to work with them for things like object recognition. I will keep it nice and easy, just like I want tutorials to be, and leave complex stuff aside (you can always search the original paper if you want to learn more about some technique).
+</p><p><br>
+</p>
+<hr>
+<hr>
+<p>Go to root: <a href="http://robotica.unileon.es/mediawiki/index.php/PhD-3D-Object-Tracking" title="PhD-3D-Object-Tracking">PhD-3D-Object-Tracking</a>
+</p><p>Links to articles:
+</p><p><strong class="selflink">PCL/OpenNI tutorial 0: The very basics</strong>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_1:_Installing_and_testing" title="PCL/OpenNI tutorial 1: Installing and testing">PCL/OpenNI tutorial 1: Installing and testing</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)" title="PCL/OpenNI tutorial 2: Cloud processing (basic)">PCL/OpenNI tutorial 2: Cloud processing (basic)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_3:_Cloud_processing_(advanced)" title="PCL/OpenNI tutorial 3: Cloud processing (advanced)">PCL/OpenNI tutorial 3: Cloud processing (advanced)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_4:_3D_object_recognition_(descriptors)" title="PCL/OpenNI tutorial 4: 3D object recognition (descriptors)">PCL/OpenNI tutorial 4: 3D object recognition (descriptors)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_5:_3D_object_recognition_(pipeline)" title="PCL/OpenNI tutorial 5: 3D object recognition (pipeline)">PCL/OpenNI tutorial 5: 3D object recognition (pipeline)</a>
+</p><p><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_troubleshooting" title="PCL/OpenNI troubleshooting">PCL/OpenNI troubleshooting</a>
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.094 seconds
+Real time usage: 0.101 seconds
+Preprocessor visited node count: 57/1000000
+Preprocessor generated node count: 96/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:261-0!*!0!!en!2!* and timestamp 20150622134758
+ -->
+</div>								<div class="printfooter">
+				Retrieved from "<a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&oldid=4608">http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&amp;oldid=4608</a>"				</div>
+												<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+				<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+	<h3 id="p-personal-label">Personal tools</h3>
+	<ul>
+<li id="pt-login"><a href="http://robotica.unileon.es/mediawiki/index.php?title=Special:UserLogin&returnto=PCL%2FOpenNI+tutorial+0%3A+The+very+basics" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>	</ul>
+</div>
+				<div id="left-navigation">
+					<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+	<h3 id="p-namespaces-label">Namespaces</h3>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE.html" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk" class="new"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=Talk:PCL/OpenNI_tutorial_0:_The_very_basics&action=edit&redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+	<h3 id="mw-vector-current-variant">
+		</h3>
+	<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+				</div>
+				<div id="right-navigation">
+					<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+	<h3 id="p-views-label">Views</h3>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE.html">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+	<h3 id="p-cactions-label" tabindex="0"><span>Actions</span><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+<div id="p-search" role="search">
+	<h3><label for="searchInput">Search</label></h3>
+	<form action="http://robotica.unileon.es/mediawiki/index.php" id="searchform">
+				<div id="simpleSearch">
+						<input name="search" placeholder="Search" title="Search Robótica - ULE [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off">						<button type="submit" name="button" title="Search the pages for this text" id="searchButton"><img src="./PCL_OpenNI tutorial 0_ The very basics - Robótica - ULE_files/search-ltr.png" alt="Search" width="12" height="13"></button>								<input type="hidden" name="title" value="Special:Search">
+		</div>
+	</form>
+</div>
+				</div>
+			</div>
+			<div id="mw-panel" class="collapsible-nav">
+					<div id="p-logo" role="banner"><a style="background-image: url(/mediawiki/skins/common/images/LogoRobotica_small.png);" href="http://robotica.unileon.es/mediawiki/index.php/Home" title="Visit the main page"></a></div>
+				<div class="portal first persistent" role="navigation" id="p-Contents" aria-labelledby="p-Contents-label">
+	<h3 id="p-Contents-label">Contents</h3>
+	<div class="body">
+		<ul>
+			<li id="n-Home"><a href="http://robotica.unileon.es/mediawiki/index.php/Home">Home</a></li>
+			<li id="n-People"><a href="http://robotica.unileon.es/mediawiki/index.php/People">People</a></li>
+			<li id="n-Publications"><a href="http://robotica.unileon.es/mediawiki/index.php/Publications">Publications</a></li>
+			<li id="n-Activities"><a href="http://robotica.unileon.es/mediawiki/index.php/Activities">Activities</a></li>
+			<li id="n-Projects"><a href="http://robotica.unileon.es/mediawiki/index.php/Projects">Projects</a></li>
+			<li id="n-Software"><a href="http://robotica.unileon.es/mediawiki/index.php/Software">Software</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal expanded" role="navigation" id="p-Wiki" aria-labelledby="p-Wiki-label">
+	<h3 id="p-Wiki-label" tabindex="2"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#">Wiki</a></h3>
+	<div class="body" style="display: block;">
+		<ul>
+			<li id="n-recentchanges"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-randompage"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+			<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" rel="nofollow" title="The place to find out">Help</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+	<h3 id="p-tb-label" tabindex="3"><a href="http://robotica.unileon.es/mediawiki/index.php/PCL/OpenNI_tutorial_0:_The_very_basics#">Tools</a></h3>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:WhatLinksHere/PCL/OpenNI_tutorial_0:_The_very_basics" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:RecentChangesLinked/PCL/OpenNI_tutorial_0:_The_very_basics" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://robotica.unileon.es/mediawiki/index.php/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li id="t-print"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+			<li id="t-permalink"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&oldid=4608" title="Permanent link to this revision of the page">Permanent link</a></li>
+			<li id="t-info"><a href="http://robotica.unileon.es/mediawiki/index.php?title=PCL/OpenNI_tutorial_0:_The_very_basics&action=info">Page information</a></li>
+		</ul>
+	</div>
+</div>
+			</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 January 2015, at 10:14.</li>
+											<li id="footer-info-viewcount">This page has been accessed 6,515 times.</li>
+									</ul>
+									<div style="clear:both"></div>
+		</div>
+		<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","skins.vector.collapsibleNav"],null,true);
+}</script><div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div>
+<script>if(window.mw){
+mw.loader.state({"site":"ready"});
+}</script>
+<!-- Served in 0.115 secs. -->
+	
+
+</body></html>
